@@ -9,21 +9,21 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="394.0" prefWidth="648.0" style="-fx-background-color: #c8dcf4;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.htbanve.LoginController">
+<AnchorPane id="AnchorPane" style="-fx-background-color: #c8dcf4;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.htbanve.LoginController">
    <children>
-      <AnchorPane layoutX="-14.0" layoutY="-12.0" prefHeight="112.0" prefWidth="662.0" style="-fx-background-color: #a7c7e7;" stylesheets="@css/login.css">
+      <AnchorPane layoutX="-14.0" layoutY="-12.0" prefHeight="112.0" prefWidth="662.0" style="-fx-background-color: #a7c7e7;" stylesheets="@css/login.css" AnchorPane.bottomAnchor="264.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <ImageView fitHeight="92.0" fitWidth="220.0" layoutX="24.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="92.0" fitWidth="220.0" layoutX="24.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="24.0" AnchorPane.topAnchor="16.0">
                <image>
                   <Image url="@img/oubus.png" />
                </image>
             </ImageView>
-            <Button layoutX="477.0" layoutY="41.0" mnemonicParsing="false" onAction="#SignuppnaneShow" prefHeight="38.0" prefWidth="146.0" text="ĐĂNG KÝ" textFill="#fff4ce">
+            <Button layoutX="477.0" layoutY="41.0" mnemonicParsing="false" onAction="#SignuppnaneShow" prefHeight="38.0" prefWidth="146.0" text="ĐĂNG KÝ" textFill="#fff4ce" AnchorPane.topAnchor="41.0">
                <font>
                   <Font name="SVN-GothamBlack" size="13.0" />
                </font>
             </Button>
-            <Button layoutX="300.0" layoutY="41.0" mnemonicParsing="false" onAction="#LoginpaneShow" prefHeight="38.0" prefWidth="138.0" text="ĐĂNG NHẬP" textFill="#fff4ce">
+            <Button layoutX="300.0" layoutY="41.0" mnemonicParsing="false" onAction="#LoginpaneShow" prefHeight="38.0" prefWidth="138.0" text="ĐĂNG NHẬP" textFill="#fff4ce" AnchorPane.topAnchor="41.0">
                <font>
                   <Font name="SVN-GothamBlack" size="13.0" />
                </font>
@@ -55,7 +55,7 @@
             </Label>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="panedangki" layoutY="80.0" prefHeight="262.0" prefWidth="600.0">
+      <AnchorPane fx:id="panedangki" layoutY="80.0">
          <children>
             <TextField fx:id="txtdktk" layoutX="257.0" layoutY="101.0" prefHeight="26.0" prefWidth="227.0" promptText="Nhập tài khoản" style="-fx-background-color: #FFF4CE;">
                <font>
@@ -63,7 +63,7 @@
                </font></TextField>
             <TextField fx:id="txtdkpass" layoutX="257.0" layoutY="148.0" prefHeight="26.0" prefWidth="227.0" promptText="Nhập mật khẩu" style="-fx-background-color: #FFF4CE;" />
             <TextField fx:id="txtdkemail" layoutX="257.0" layoutY="196.0" prefHeight="26.0" prefWidth="227.0" promptText="Nhập email" style="-fx-background-color: #FFF4CE;" />
-            <Button fx:id="btxndk" layoutX="257.0" layoutY="247.0" mnemonicParsing="false" onAction="#addAdmin" prefHeight="26.0" prefWidth="92.0" style="-fx-background-color: #004AAD;" text="XÁC NHẬN" textFill="#fff4ce">
+            <Button fx:id="btxndk" layoutX="257.0" layoutY="247.0" mnemonicParsing="false" onAction="#addAdmin" style="-fx-background-color: #004AAD;" text="XÁC NHẬN" textFill="#fff4ce">
                <font>
                   <Font name="SVN-GothamBlack" size="12.0" />
                </font></Button>
@@ -89,7 +89,7 @@
                </font></TextField>
          </children>
       </AnchorPane>
-      <Button fx:id="QuayLaiTC" layoutX="503.0" layoutY="352.0" mnemonicParsing="false" onAction="#SwitchtoTC" prefHeight="26.0" prefWidth="130.0" style="-fx-background-color: #FFF4CE;" text="Quay lại trang chủ">
+      <Button fx:id="QuayLaiTC" layoutX="512.0" layoutY="324.0" mnemonicParsing="false" onAction="#SwitchtoTC" style="-fx-background-color: #FFF4CE;" text="Quay lại trang chủ">
          <font>
             <Font name="SVN-Gotham Light" size="11.0" />
          </font></Button>

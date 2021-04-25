@@ -46,6 +46,12 @@ public class LoginController implements Initializable{
     Connection conn = null;
     ResultSet rs = null;
     PreparedStatement pst = null;
+    @FXML
+    private Button txtxnlogin;
+    @FXML
+    private Button btxndk;
+    @FXML
+    private Button QuayLaiTC;
     
 
     /**
@@ -61,11 +67,13 @@ public class LoginController implements Initializable{
     public void SwitchtoTC() throws IOException{
         App.setRoot("TrangChu");
     }
+    @FXML
     public void LoginpaneShow(){
         panelogin.setVisible(true);
         panedangki.setVisible(false);
         
     }
+    @FXML
     public void SignuppnaneShow(){
         panelogin.setVisible(false);
         panedangki.setVisible(true);       
@@ -89,6 +97,7 @@ public class LoginController implements Initializable{
             JOptionPane.showMessageDialog(null, e);
         }
     }
+    @FXML
     public void addAdmin(ActionEvent event){
         if("".equals(txtdktk.getText()) || "".equals(txtdkpass.getText()) || "".equals(txtdkemail.getText()))
         {

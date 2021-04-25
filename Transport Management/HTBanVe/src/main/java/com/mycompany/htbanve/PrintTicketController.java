@@ -52,6 +52,7 @@ public class PrintTicketController {
         gioinLabel.setText(LocalTime.now().toString().substring(0, 5));
     }
     
+    @FXML
     public void QuayLaiQLBV(ActionEvent e) throws IOException {
         Stage stage = (Stage)((Node) e.getSource()).getScene().getWindow();
         FXMLLoader loader = new FXMLLoader();

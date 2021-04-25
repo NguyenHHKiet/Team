@@ -5,8 +5,12 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 
 public class TrangChuController implements Initializable{
+
+    @FXML
+    private Button KHbt;
 
     @FXML
     public void SwitchtoLogin() throws IOException{
@@ -18,7 +22,6 @@ public class TrangChuController implements Initializable{
     }
 
     
-    @FXML
     public void ExitTC() throws IOException {
         System.exit(0);
     }

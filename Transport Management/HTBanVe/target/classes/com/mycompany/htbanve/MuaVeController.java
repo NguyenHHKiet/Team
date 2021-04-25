@@ -200,3 +200,4 @@ public class MuaVeController implements Initializable{
         tbvQLCX.setItems(sortedData);
     }
 }
+

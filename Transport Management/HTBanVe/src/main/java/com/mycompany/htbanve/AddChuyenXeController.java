@@ -85,8 +85,11 @@ public class AddChuyenXeController implements Initializable {
     Connection conn = null;
     ResultSet rs = null;
     PreparedStatement pst = null;
+    @FXML
+    private TextField txtBSX;
     
 
+    @FXML
     public void QuayLai() throws IOException{
         App.setRoot("ChonChucNang");
     }
@@ -139,6 +142,7 @@ public class AddChuyenXeController implements Initializable {
         colghe.setCellValueFactory(new PropertyValueFactory<>("ghe"));
 
     }
+    @FXML
     public void AddQLCX(){
          conn = JdbcUtils.getConnection();
         //date
@@ -161,6 +165,7 @@ public class AddChuyenXeController implements Initializable {
             }
         }        
     }
+    @FXML
     public void Edit(){
     if ("".equals(txtid.getText()) || "".equals(txttencx.getText()) || "".equals(txtbsx.getText()) 
             || "".equals(txtgiokh.getText()) || "".equals(txtngaykh.getValue()) || "".equals(txtgiave.getText()) 
@@ -181,6 +186,7 @@ public class AddChuyenXeController implements Initializable {
         }
     }
 }
+    @FXML
     public void DeleteQLCX(){
         try {
             QLCXsServices.DeleteCX(txtid.getText());
@@ -191,7 +197,6 @@ public class AddChuyenXeController implements Initializable {
             JOptionPane.showMessageDialog(null, e);
         }
     }
-    @FXML
     void FindCX() throws SQLException {
 
         dataList = QLCXsServices.getDataQLCX();

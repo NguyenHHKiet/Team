@@ -7,25 +7,25 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="429.0" prefWidth="538.0" style="-fx-background-color: #c8dcf4;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.htbanve.TrangChuController">
+<AnchorPane style="-fx-background-color: #c8dcf4;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.htbanve.TrangChuController">
    <children>
-      <ImageView fitHeight="361.0" fitWidth="369.0" layoutX="88.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="361.0" fitWidth="369.0" layoutX="88.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="88.0" AnchorPane.rightAnchor="89.0" AnchorPane.topAnchor="0.0">
          <image>
             <Image url="@img/it81bus.png" />
          </image>
       </ImageView>
-      <Label alignment="CENTER" layoutX="-1.0" layoutY="14.0" prefHeight="44.0" prefWidth="538.0" style="-fx-background-color: 3A7D44;" text="HỆ THỐNG QUẢN LÝ VÉ XE" textAlignment="CENTER" textFill="#323640">
+      <Label alignment="CENTER" layoutX="-1.0" layoutY="14.0" style="-fx-background-color: 3A7D44;" text="HỆ THỐNG QUẢN LÝ VÉ XE" textAlignment="CENTER" textFill="#323640" AnchorPane.bottomAnchor="373.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="14.0">
          <font>
             <Font name="System Bold" size="22.0" />
          </font>
       </Label>
-      <AnchorPane layoutY="321.0" prefHeight="110.0" prefWidth="538.0" style="-fx-background-color: #a7c7e7;">
+      <AnchorPane layoutY="321.0" style="-fx-background-color: #a7c7e7;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="321.0">
          <children>
-            <Button layoutX="302.0" layoutY="28.0" mnemonicParsing="false" onAction="#SwitchtoLogin" prefHeight="54.0" prefWidth="182.0" stylesheets="@css/trangChu.css" text="ĐĂNG NHẬP ADMIN" textFill="#323640">
+            <Button layoutX="302.0" layoutY="28.0" mnemonicParsing="false" onAction="#SwitchtoLogin" stylesheets="@css/trangChu.css" text="ĐĂNG NHẬP ADMIN" textFill="#323640" AnchorPane.bottomAnchor="44.0" AnchorPane.leftAnchor="302.0" AnchorPane.rightAnchor="56.0" AnchorPane.topAnchor="28.0">
                <font>
                   <Font name="SVN-GothamBlack" size="17.0" />
                </font></Button>
-            <Button fx:id="KHbt" layoutX="57.0" layoutY="28.0" mnemonicParsing="false" onAction="#SwitchtoKH" prefHeight="54.0" prefWidth="192.0" stylesheets="@css/trangChu.css" text="KHÁCH HÀNG ĐẶT VÉ" textFill="#323640">
+            <Button fx:id="KHbt" layoutX="57.0" layoutY="28.0" mnemonicParsing="false" onAction="#SwitchtoKH" stylesheets="@css/trangChu.css" text="KHÁCH HÀNG ĐẶT VÉ" textFill="#323640" AnchorPane.bottomAnchor="44.0" AnchorPane.leftAnchor="57.0" AnchorPane.rightAnchor="291.0" AnchorPane.topAnchor="28.0">
                <font>
                   <Font size="17.0" />
                </font></Button>

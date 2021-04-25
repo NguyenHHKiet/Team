@@ -73,11 +73,8 @@ public class QuanLyVeXeController implements Initializable {
     private TextField txtsoghe;
     @FXML
     private TextField txtidrandom;
-    @FXML
     private TextField txtngayht;
-    @FXML
     private TextField txtgioht;
-    @FXML
     private TableView<QLBV> tbvQLBV;
     @FXML
     private TableColumn<QLBV, String> colNameCX;
@@ -95,19 +92,13 @@ public class QuanLyVeXeController implements Initializable {
     private TableColumn<QLBV, String> coltennv;
     @FXML
     private TableColumn<QLBV, String> colsdtnv;
-    @FXML
     private TableColumn<QLBV, String> coltenkh;
     @FXML
     private TableColumn<QLBV, String> colghe;
-    @FXML
     private TableColumn<QLBV, String> colsdtkh;
-    @FXML
     private TextField filterField;
-    @FXML
     private TableColumn<QLBV, String> colidrandom;
-    @FXML
     private TableColumn<QLBV, String> colidphanbiet;
-    @FXML
     private TextField txtidht;
     
     int index = -1;
@@ -116,6 +107,10 @@ public class QuanLyVeXeController implements Initializable {
     ResultSet rs = null;
     ResultSet rs1 = null;
     PreparedStatement pst = null;
+    @FXML
+    private TableView<?> tbvQLCX;
+    @FXML
+    private TableColumn<?, ?> colid;
     /**
      * Initializes the controller class.
      * @param url
@@ -134,6 +129,7 @@ public class QuanLyVeXeController implements Initializable {
             Logger.getLogger(MuaVeController.class.getName()).log(Level.SEVERE, null, ex);
         }
     } 
+    @FXML
     public void QuayLaiTC() throws IOException{
         App.setRoot("ChonChucNang");
     }
@@ -177,6 +173,7 @@ public class QuanLyVeXeController implements Initializable {
         txtidht.setText(colidphanbiet.getCellData(index));
         
     }
+    @FXML
     public void Edit(){
         if ( "".equals(txttenkh.getText()) || "".equals(txtsdtkh.getText()) 
                 || "".equals(txtsoghe.getText()) )
@@ -203,7 +200,6 @@ public class QuanLyVeXeController implements Initializable {
             JOptionPane.showMessageDialog(null, e);
         }
     }
-    @FXML
     void FindCX() throws SQLException {
         dataList = QLBVServices.getDataQLBV2();
         tbvQLBV.setItems(dataList);
