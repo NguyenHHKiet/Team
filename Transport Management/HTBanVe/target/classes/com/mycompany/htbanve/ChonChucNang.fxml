@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="375.0" prefWidth="618.0" style="-fx-background-color: #c8dcf4;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.htbanve.ChonChucNangController">
+   <children>
+      <ImageView fitHeight="193.0" fitWidth="461.0" layoutX="81.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@img/oubus.png" />
+         </image>
+      </ImageView>
+      <Button layoutX="81.0" layoutY="204.0" mnemonicParsing="false" onAction="#SwitchtoAddCX" prefHeight="62.0" prefWidth="217.0" style="-fx-background-color: #323641;" stylesheets="@css/chonChucNang.css" text="Quản lý chuyến xe" textFill="#fff4ce">
+         <font>
+            <Font size="16.0" />
+         </font></Button>
+      <Button layoutX="322.0" layoutY="204.0" mnemonicParsing="false" onAction="#SwitchtoQLVX" prefHeight="62.0" prefWidth="218.0" style="-fx-background-color: #323641;" stylesheets="@css/chonChucNang.css" text="Quản lý vé xe" textFill="#fff4ce">
+         <font>
+            <Font size="16.0" />
+         </font></Button>
+      <Button layoutX="322.0" layoutY="285.0" mnemonicParsing="false" onAction="#SwitchtoTC" prefHeight="62.0" prefWidth="218.0" stylesheets="@css/chonChucNang.css" text="Trang chủ" textFill="#fff4ce">
+         <font>
+            <Font size="16.0" />
+         </font></Button>
+      <Button layoutX="80.0" layoutY="285.0" mnemonicParsing="false" onAction="#SwitchtoLogin" prefHeight="62.0" prefWidth="218.0" stylesheets="@css/chonChucNang.css" text="Trở về Login" textFill="#fff4ce">
+         <font>
+            <Font size="16.0" />
+         </font></Button>
+   </children>
+</AnchorPane>
