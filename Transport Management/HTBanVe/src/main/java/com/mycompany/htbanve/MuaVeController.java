@@ -14,9 +14,16 @@ import com.mycompany.htbanve.service.QLCXsServices;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import static java.time.temporal.TemporalQueries.localDate;
 import java.util.ResourceBundle;
 import java.util.UUID;
 import java.util.logging.Level;
@@ -25,8 +32,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -38,17 +47,27 @@ import javax.swing.JOptionPane;
  * @author Tuan Anh
  */
 public class MuaVeController implements Initializable{
+    @FXML
     private TextField txttencx;
+    @FXML
     private TextField txtbsx;
+    @FXML
     private TextField txtgiokh;
+    @FXML
     private TextField txttennv;
+    @FXML
     private TextField txtsdtnv;
+    @FXML
     private TextField txtloaixe;
+    @FXML
     private TextField txtgiave;
+    @FXML
     private TextField txtid;
-    private TextField txtngaykh;
+    @FXML
+    private DatePicker txtngaykh;
     private TextField txttenkh;
     private TextField txtsdtkh;
+    @FXML
     private TextField txtghe;
     private TextField txtMaGhe;
     private TableView<QLCX> tbvQLCX;
@@ -70,6 +89,8 @@ public class MuaVeController implements Initializable{
     Connection conn = null;
     ResultSet rs = null;
     PreparedStatement pst;
+    @FXML
+    private TextField txtBSX;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -80,7 +101,6 @@ public class MuaVeController implements Initializable{
             Logger.getLogger(MuaVeController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    @FXML
     public void QuayLaiTC() throws IOException{
         App.setRoot("TrangChu");
     }
@@ -102,17 +122,17 @@ public class MuaVeController implements Initializable{
 
     }
     // Lay du lieu tu table view vao textfield
-    @FXML
     void getSelected (MouseEvent event){
         index = tbvQLCX.getSelectionModel().getSelectedIndex();
         if(index <= -1){
             return;
         }
+        String pattern = "yyyy-MM-dd";
         txtid.setText(colidphanbiet.getCellData(index));
         txttencx.setText(colNameCX.getCellData(index));
         txtbsx.setText(colbsx.getCellData(index));
         txtloaixe.setText(colloaixe.getCellData(index));
-        txtngaykh.setText(colngaykh.getCellData(index));
+        txtngaykh.setPromptText(pattern.toLowerCase());
         txtgiokh.setText(colgiokh.getCellData(index));
         txtgiave.setText(colgiave.getCellData(index));
         txttennv.setText(coltennv.getCellData(index));
@@ -121,13 +141,12 @@ public class MuaVeController implements Initializable{
         
     }
     // them ve vao csdl
-    @FXML
     public void AddQLBV(){
          conn = JdbcUtils.getConnection();
         //date
         // dieu kien k cho phep de trong o dl
         if ("".equals(txtid.getText()) || "".equals(txttencx.getText()) || "".equals(txtbsx.getText()) 
-                || "".equals(txtgiokh.getText()) || "".equals(txtngaykh.getText()) || "".equals(txtgiave.getText()) 
+                || "".equals(txtgiokh.getText()) || "".equals(txtngaykh.getValue().toString()) || "".equals(txtgiave.getText()) 
                 || "".equals(txttennv.getText()) || "".equals(txtsdtnv.getText()) || "".equals(txtloaixe.getText()) 
                 || "".equals(txttenkh.getText()) || "".equals(txtsdtkh.getText()) || "".equals(txtghe.getText()))
         {            
@@ -139,10 +158,15 @@ public class MuaVeController implements Initializable{
         }else
         {                 
             try {
-                String rm = UUID.randomUUID().toString();   
-                QLBVServices.addVe(rm,txttencx.getText() , txtbsx.getText(),txtgiokh.getText(), txtngaykh.getText(), txtgiave.getText()
+                String rm = UUID.randomUUID().toString(); 
+                DateFormat df = new SimpleDateFormat("dd MMM yyyy");
+                LocalDate localDate = txtngaykh.getValue();
+                Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
+                Date date = (Date) Date.from(instant);
+                
+                QLBVServices.addVe(rm,txttencx.getText() , txtbsx.getText(),txtgiokh.getText(), localDate.toString()/*txtngaykh.getText()*/ , txtgiave.getText()
                         , txtloaixe.getText(), txttenkh.getText(), txtsdtkh.getText(), txttennv.getText(), txtsdtnv.getText()
-                        , txtMaGhe.getText(), txtid.getText());           
+                        , txtMaGhe.getText(), txtid.getText());          
                 try {
                     Integer a = (Integer.parseInt(txtghe.getText()) - 1);
                     String value1 = a.toString();
@@ -198,5 +222,13 @@ public class MuaVeController implements Initializable{
         SortedList<QLCX> sortedData = new SortedList<>(filteredData);
         sortedData.comparatorProperty().bind(tbvQLCX.comparatorProperty());
         tbvQLCX.setItems(sortedData);
+    }
+
+    @FXML
+    private void Edit(ActionEvent event) {
+    }
+
+    @FXML
+    private void DeleteQLCX(ActionEvent event) {
     }
 }

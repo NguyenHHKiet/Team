@@ -18,7 +18,7 @@ public class TrangChuController implements Initializable{
     }
     @FXML
     public void SwitchtoKH() throws IOException{
-        App.setRoot("Muave");
+        App.setRoot("MuaVe");
     }
 
     
