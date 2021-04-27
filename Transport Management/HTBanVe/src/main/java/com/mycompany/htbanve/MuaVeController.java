@@ -94,14 +94,21 @@ public class MuaVeController implements Initializable{
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
+        /*
         try {
             UpdateQLCX();
             FindCX();
         } catch (SQLException ex) {
             Logger.getLogger(MuaVeController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        */
     }
     public void QuayLaiTC() throws IOException{
+        App.setRoot("TrangChu");
+    }
+    @FXML
+    public void SwitchtoTC() throws IOException{
         App.setRoot("TrangChu");
     }
     // Load dl len table view
@@ -153,7 +160,7 @@ public class MuaVeController implements Initializable{
             JOptionPane.showMessageDialog(null, "Chua nhap du thong tin","about",JOptionPane.INFORMATION_MESSAGE);
         }
         else if("0".equals(txtghe.getText())){
-            JOptionPane.showMessageDialog(null, "Chuyến xe đã hết ghế trống\n Mời bạn chọn chuyến xe khác");            
+            JOptionPane.showMessageDialog(null, "Chuyến xe đã hết ghế trống\n Mời bạn chọn chuyến xe khác");  
                   
         }else
         {                 
@@ -180,12 +187,14 @@ public class MuaVeController implements Initializable{
                         + "!!!!Quá 30p trước giờ khởi hành vé sẽ bị hủy!!!!\n"
                         + "Chân thành cảm ơn quý khách!!!");
                 UpdateQLCX();
-                FindCX();
+                //FindCX();
             } catch (SQLException e) {
                 JOptionPane.showMessageDialog(null,e);
             }
         }        
     }
+    
+    /*
     void FindCX() throws SQLException {
         dataList = QLCXsServices.getDataQLCX();
         tbvQLCX.setItems(dataList);
@@ -223,6 +232,8 @@ public class MuaVeController implements Initializable{
         sortedData.comparatorProperty().bind(tbvQLCX.comparatorProperty());
         tbvQLCX.setItems(sortedData);
     }
+    
+    */
 
     @FXML
     private void Edit(ActionEvent event) {
