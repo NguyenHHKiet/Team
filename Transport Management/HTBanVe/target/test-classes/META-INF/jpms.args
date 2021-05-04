@@ -1,4 +1,0 @@
---patch-module
-com.mycompany.htbanve=_
---add-reads
-com.mycompany.htbanve=ALL-UNNAMED
