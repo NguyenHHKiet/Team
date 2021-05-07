@@ -6,26 +6,26 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" style="-fx-background-color: #c8dcf4;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.htbanve.ChonChucNangController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #c8dcf4;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.htbanve.ChonChucNangController">
    <children>
-      <ImageView fitHeight="187.0" fitWidth="542.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="160.0" AnchorPane.topAnchor="0.0">
+      <ImageView fitHeight="178.0" fitWidth="427.0" layoutX="87.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="200.8918914794922" AnchorPane.topAnchor="26.0">
          <image>
             <Image url="@img/oubus.png" />
          </image>
       </ImageView>
-      <Button layoutX="59.0" layoutY="204.0" mnemonicParsing="false" onAction="#SwitchtoAddCX" style="-fx-background-color: #323641;" stylesheets="@css/chonChucNang.css" text="Quản lý chuyến xe" textFill="#fff4ce">
+      <Button layoutX="108.0" layoutY="239.0" mnemonicParsing="false" onAction="#SwitchtoAddCX" prefHeight="51.0" prefWidth="174.0" style="-fx-background-color: #323641;" stylesheets="@css/chonChucNang.css" text="Quản lý chuyến xe" textFill="#fff4ce">
          <font>
             <Font size="16.0" />
          </font></Button>
-      <Button layoutX="264.0" layoutY="204.0" mnemonicParsing="false" onAction="#SwitchtoQLVX" prefHeight="35.0" prefWidth="152.0" style="-fx-background-color: #323641;" stylesheets="@css/chonChucNang.css" text="Quản lý vé xe" textFill="#fff4ce">
+      <Button layoutX="308.0" layoutY="239.0" mnemonicParsing="false" onAction="#SwitchtoQLVX" prefHeight="51.0" prefWidth="174.0" style="-fx-background-color: #323641;" stylesheets="@css/chonChucNang.css" text="Quản lý vé xe" textFill="#fff4ce">
          <font>
             <Font size="16.0" />
          </font></Button>
-      <Button layoutX="264.0" layoutY="268.0" mnemonicParsing="false" onAction="#SwitchtoTC" prefWidth="152.0" stylesheets="@css/chonChucNang.css" text="Trang chủ" textFill="#fff4ce">
+      <Button layoutX="308.0" layoutY="310.0" mnemonicParsing="false" onAction="#SwitchtoTC" prefHeight="51.0" prefWidth="174.0" stylesheets="@css/chonChucNang.css" text="Trang chủ" textFill="#fff4ce">
          <font>
             <Font size="16.0" />
          </font></Button>
-      <Button layoutX="59.0" layoutY="268.0" mnemonicParsing="false" onAction="#SwitchtoLogin" prefHeight="35.0" prefWidth="152.0" stylesheets="@css/chonChucNang.css" text="Trở về Login" textFill="#fff4ce">
+      <Button layoutX="108.0" layoutY="310.0" mnemonicParsing="false" onAction="#SwitchtoLogin" prefHeight="51.0" prefWidth="174.0" stylesheets="@css/chonChucNang.css" text="Trở về Login" textFill="#fff4ce">
          <font>
             <Font size="16.0" />
          </font></Button>

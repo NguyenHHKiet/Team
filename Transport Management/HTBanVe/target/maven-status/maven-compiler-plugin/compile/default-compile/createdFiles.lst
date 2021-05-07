@@ -13,5 +13,6 @@ com\mycompany\htbanve\pojo\Admin.class
 module-info.class
 com\mycompany\htbanve\service\QLBVServices.class
 com\mycompany\htbanve\App.class
+com\mycompany\htbanve\stage.class
 com\mycompany\htbanve\TrangChuController.class
 com\mycompany\htbanve\PrintTicketController.class

@@ -72,23 +72,23 @@ public class AdminServicesTest {
     public void testAddTKAdmin(){
         String q = null,w = null,e =null;
         try{
-        String a = "Tung20001";
-        String b = "12345";
-        String c = "Tung2000@gmail.com";
+        String a = "test000";
+        String b = "123456";
+        String c = "test000@ou.edu.vn";
         AdminServices.addTKAdmin(a, b, c);
         List<Admin> list = AdminServices.getDataAdmin();
         for (Admin a1 : list){
-            if(a1.getTk().equals("Tung20001") && 
-                    a1.getPass().equals("12345") &&  
-                        a1.getEmail().equals("Tung2000@gmail.com")){
+            if(a1.getTk().equals("test000") && 
+                    a1.getPass().equals("123456") &&  
+                        a1.getEmail().equals("test000@ou.edu.vn")){
                 q = a1.getTk();
                 w = a1.getPass();
                 e = a1.getEmail();
             }
         }
-            Assert.assertEquals("Tung20001", q);
-            Assert.assertEquals("12345", w);
-            Assert.assertEquals("Tung2000@gmail.com", e);
+            Assert.assertEquals("test000", q);
+            Assert.assertEquals("123456", w);
+            Assert.assertEquals("test000@ou.edu.vn", e);
             JOptionPane.showMessageDialog(null, "Add tai khoan thanh cong");
         }catch(Exception ex){
             JOptionPane.showMessageDialog(null, ex);

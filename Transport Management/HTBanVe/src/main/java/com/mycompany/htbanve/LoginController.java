@@ -104,7 +104,7 @@ public class LoginController implements Initializable{
             JOptionPane.showMessageDialog(null, "Chưa nhập đủ thông tin");
         }else
         {
-            if("KTPM".equals(txtMaht.getText())){            
+            if("IT81".equals(txtMaht.getText())){            
             try {
                 AdminServices.addTKAdmin(txtdktk.getText(), txtdkpass.getText(), txtdkemail.getText());
                 JOptionPane.showMessageDialog(null, "Đăng kí thành công!"); 

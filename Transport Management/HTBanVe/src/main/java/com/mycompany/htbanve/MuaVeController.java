@@ -35,13 +35,17 @@ import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 import javax.swing.JOptionPane;
+import javafx.scene.Scene;
 /**
  *
  * @author Tuan Anh
@@ -94,16 +98,24 @@ public class MuaVeController implements Initializable{
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
         /*
         try {
-            UpdateQLCX();
-            FindCX();
+        UpdateQLCX();
+        FindCX();
         } catch (SQLException ex) {
-            Logger.getLogger(MuaVeController.class.getName()).log(Level.SEVERE, null, ex);
+        Logger.getLogger(MuaVeController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        */
+         */
+
     }
+    
+     public void start(Stage stage) throws IOException {
+        Scene scene = new Scene(loadFXML("TrangChu"), 1000, 600);
+        stage.setScene(scene);
+        stage.show();
+    }
+    
+    
     public void QuayLaiTC() throws IOException{
         App.setRoot("TrangChu");
     }
@@ -241,5 +253,9 @@ public class MuaVeController implements Initializable{
 
     @FXML
     private void DeleteQLCX(ActionEvent event) {
+    }
+
+    private Parent loadFXML(String trangChu) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

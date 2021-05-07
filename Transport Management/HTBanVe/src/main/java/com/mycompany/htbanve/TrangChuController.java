@@ -5,7 +5,10 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.stage.Stage;
 
 public class TrangChuController implements Initializable{
 
@@ -20,7 +23,12 @@ public class TrangChuController implements Initializable{
     public void SwitchtoKH() throws IOException{
         App.setRoot("MuaVe");
     }
-
+    
+    public void start(Stage stage) throws IOException {
+        Scene scene = new Scene(loadFXML("TrangChu"), 600, 400);
+        stage.setScene(scene);
+        stage.show();
+    }
     
     public void ExitTC() throws IOException {
         System.exit(0);
@@ -35,5 +43,9 @@ public class TrangChuController implements Initializable{
     public void initialize(URL url, ResourceBundle rb) {
 //        String a = LocalDate.now().toString();
 //        tesst.setText(a);
+    }
+
+    private Parent loadFXML(String trangChu) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
