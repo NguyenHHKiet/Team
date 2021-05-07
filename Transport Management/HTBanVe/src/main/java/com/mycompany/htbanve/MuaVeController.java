@@ -108,14 +108,7 @@ public class MuaVeController implements Initializable{
          */
 
     }
-    
-     public void start(Stage stage) throws IOException {
-        Scene scene = new Scene(loadFXML("TrangChu"), 1000, 600);
-        stage.setScene(scene);
-        stage.show();
-    }
-    
-    
+      
     public void QuayLaiTC() throws IOException{
         App.setRoot("TrangChu");
     }

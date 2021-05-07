@@ -9,6 +9,7 @@ import com.mycompany.htbanve.pojo.QLCX;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLDataException;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -21,16 +22,38 @@ import javafx.collections.ObservableList;
  * @author Tuan Anh
  */
 public class QLCXsServices {
-    public static List<QLCX> getDataQLCXs() throws SQLException{
+    
+    private Connection conn;
+
+    public QLCXsServices(Connection conn) {
+        this.conn = conn;
+    }
+    
+    public static List<QLCX> getDataQLCXs(String kw) throws SQLException{
+        if (kw == null)
+            throw new SQLDataException();
         Connection conn = JdbcUtils.getConnection();
-        Statement stm = conn.createStatement();
-        ResultSet rs = stm.executeQuery("Select * from qlcx");
+        
+        String sql = "Select * from qlcx";
+        PreparedStatement stm = this.conn.prepareStatement(sql);
+        stm.setString(1, kw);
+        ResultSet rs = stm.executeQuery();
+        
         
         List<QLCX> results = new ArrayList<>();
         while(rs.next()){
-            QLCX c = new QLCX(Integer.parseInt(rs.getString("idQLCX")),rs.getString("QLCXtencx"),rs.getString("QLCXbsx")
-                    ,rs.getString("QLCXloaixe"),rs.getString("QLCXgiokh"),rs.getString("QLCXngaykh"),rs.getString("QLCXgiave")
-                    ,rs.getString("QLCXtennv"),rs.getString("QLCXsdtnv"),rs.getString("QLCXghe"),rs.getString("idphanbiet"));  
+            QLCX c = new QLCX();
+            c.setId(rs.getInt("idQLCX"));
+            c.setTencx(rs.getString("QLCXtencx"));
+            c.setBsx(rs.getString("QLCXbsx"));
+            c.setLoaixe(rs.getString("QLCXloaixe"));
+            c.setGiokh(rs.getString("QLCXgiokh"));
+            c.setNgaykh(rs.getString("QLCXngaykh"));
+            c.setGiave(rs.getString("QLCXgiave"));
+            c.setTennv(rs.getString("QLCXtennv"));
+            c.setSdtnv(rs.getString("QLCXsdtnv"));
+            c.setGhe(rs.getString("QLCXghe"));
+              
             results.add(c);
         }
         return results;

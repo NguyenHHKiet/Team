@@ -45,6 +45,10 @@ public class QLCX {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    public QLCX() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     public void setGhe(String ghe) {
         this.ghe = ghe;
     }
