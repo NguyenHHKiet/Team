@@ -23,20 +23,19 @@ import javafx.collections.ObservableList;
  */
 public class QLCXsServices {
     
-    private Connection conn;
+    private Connection conn =JdbcUtils.getConnection();
 
     public QLCXsServices(Connection conn) {
         this.conn = conn;
     }
     
-    public static List<QLCX> getDataQLCXs(String kw) throws SQLException{
-        if (kw == null)
-            throw new SQLDataException();
+    public static List<QLCX> getDataQLCXs() throws SQLException{
+       
         Connection conn = JdbcUtils.getConnection();
         
         String sql = "Select * from qlcx";
-        PreparedStatement stm = this.conn.prepareStatement(sql);
-        stm.setString(1, kw);
+        PreparedStatement stm = conn.prepareStatement(sql);
+       
         ResultSet rs = stm.executeQuery();
         
         

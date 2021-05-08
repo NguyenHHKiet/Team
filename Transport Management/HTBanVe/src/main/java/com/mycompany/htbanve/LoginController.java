@@ -82,7 +82,7 @@ public class LoginController implements Initializable{
     @FXML
     public void AdminLogin(ActionEvent event) throws IOException{
         try {
-            conn = JdbcUtils.getConnection();
+            Connection conn = JdbcUtils.getConnection();
             String sql = "Select * from admin where Admintk = ? and Adminpass = ? ";
             pst = conn.prepareStatement(sql);
             pst.setString(1,txttentk.getText());
