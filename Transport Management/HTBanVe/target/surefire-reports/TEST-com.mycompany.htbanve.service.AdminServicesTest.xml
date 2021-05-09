@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="2" failures="0" name="com.mycompany.htbanve.service.AdminServicesTest" time="60.04" errors="1" skipped="0">
+<testsuite tests="2" failures="0" name="com.mycompany.htbanve.service.AdminServicesTest" time="294.456" errors="1" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="java.vm.version" value="16+36-2231"/>
@@ -61,8 +61,8 @@
     <property name="sun.cpu.endian" value="little"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="com.mycompany.htbanve.service.AdminServicesTest" name="testAddTKAdmin" time="59.882"/>
-  <testcase classname="com.mycompany.htbanve.service.AdminServicesTest" name="testGetDataAdmin" time="0.158">
+  <testcase classname="com.mycompany.htbanve.service.AdminServicesTest" name="testAddTKAdmin" time="294.294"/>
+  <testcase classname="com.mycompany.htbanve.service.AdminServicesTest" name="testGetDataAdmin" time="0.162">
     <error message="Cannot invoke &quot;java.sql.Connection.createStatement()&quot; because &quot;conn&quot; is null" type="java.lang.NullPointerException">java.lang.NullPointerException: Cannot invoke &quot;java.sql.Connection.createStatement()&quot; because &quot;conn&quot; is null
 	at com.mycompany.htbanve.service.AdminServices.getDataAdmin(AdminServices.java:24)
 	at com.mycompany.htbanve.service.AdminServicesTest.testGetDataAdmin(AdminServicesTest.java:60)

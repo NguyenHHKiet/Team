@@ -3,7 +3,6 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
@@ -66,20 +65,7 @@
             <TextField fx:id="txtghe" promptText="Nhập số ghế còn trống" styleClass="textfield" GridPane.columnIndex="1" GridPane.rowIndex="7" />
          </children>
       </GridPane>
-      <TableView fx:id="tbvQLCX" layoutX="591.0" layoutY="146.0" onMouseClicked="#getSelected" stylesheets="@css/addChuyenXe.css">
-        <columns>
-          <TableColumn fx:id="colid" prefWidth="31.20001220703125" text="ID" />
-          <TableColumn fx:id="colNameCX" prefWidth="134.39996337890625" text="Tên chuyến xe" />
-            <TableColumn fx:id="colbsx" prefWidth="88.79998779296875" text="Biển số xe" />
-            <TableColumn fx:id="colloaixe" prefWidth="67.20001220703125" text="Loại xe" />
-            <TableColumn fx:id="colngaykh" prefWidth="114.4000244140625" text="Ngày khởi hành" />
-            <TableColumn fx:id="colgiokh" prefWidth="105.5999755859375" text="Giờ khởi hành" />
-            <TableColumn fx:id="colgiave" prefWidth="55.199951171875" text="Giá vé" />
-            <TableColumn fx:id="coltennv" prefWidth="127.2000732421875" text="Tên nhân viên" />
-            <TableColumn fx:id="colsdtnv" prefWidth="72.0" text="SDT nv" />
-            <TableColumn fx:id="colghe" prefWidth="68.0" text="Số ghế" />
-        </columns>
-      </TableView>
+      <TableView fx:id="tbvQLCX" layoutX="591.0" layoutY="146.0" onMouseClicked="#getSelected" stylesheets="@css/addChuyenXe.css" />
       <Button layoutX="328.0" layoutY="484.0" mnemonicParsing="false" onAction="#Edit" stylesheets="@css/addChuyenXe.css" text="CẬP NHẬT">
          <effect>
             <DropShadow color="#b6c9d6" offsetX="5.0" offsetY="4.0" radius="11.192499999999999" width="25.77" />

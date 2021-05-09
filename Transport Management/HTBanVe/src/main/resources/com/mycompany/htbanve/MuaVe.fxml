@@ -3,6 +3,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.BoxBlur?>
@@ -16,7 +17,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #c8dcf4;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.htbanve.MuaVeController">
+<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1116.0" style="-fx-background-color: #c8dcf4;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.htbanve.MuaVeController">
    <children>
       <AnchorPane layoutX="184.0" layoutY="58.0" style="-fx-background-color: #2F2A2B;" visible="false" AnchorPane.bottomAnchor="542.0" AnchorPane.leftAnchor="184.0" AnchorPane.rightAnchor="416.0" AnchorPane.topAnchor="58.0" />
       <GridPane layoutX="48.0" layoutY="135.0" stylesheets="@css/addChuyenXe.css">
@@ -63,12 +64,12 @@
             <TextField fx:id="txtghe" promptText="Nhập số ghế còn trống" styleClass="textfield" GridPane.columnIndex="1" GridPane.rowIndex="7" />
          </children>
       </GridPane>
-      <Button layoutX="184.0" layoutY="498.0" mnemonicParsing="false" onAction="#Edit" prefHeight="50.0" prefWidth="150.0" stylesheets="@css/addChuyenXe.css" text="ĐẶT VÉ">
+      <Button layoutX="109.0" layoutY="498.0" mnemonicParsing="false" onAction="#AddQLBV" prefHeight="50.0" prefWidth="150.0" stylesheets="@css/addChuyenXe.css" text="ĐẶT VÉ">
          <effect>
             <DropShadow color="#b6c9d6" offsetX="5.0" offsetY="4.0" radius="11.192499999999999" width="25.77" />
          </effect>
       </Button>
-      <Button layoutX="343.0" layoutY="498.0" mnemonicParsing="false" onAction="#DeleteQLCX" prefHeight="50.0" prefWidth="150.0" stylesheets="@css/addChuyenXe.css" text="HỦY VÉ">
+      <Button layoutX="292.0" layoutY="498.0" mnemonicParsing="false" onAction="#DeleteQLBV" prefHeight="50.0" prefWidth="150.0" stylesheets="@css/addChuyenXe.css" text="HỦY VÉ">
          <effect>
             <DropShadow color="#bbd0ed" offsetX="5.0" offsetY="4.0" />
          </effect>
@@ -92,5 +93,9 @@
             </BoxBlur>
          </effect>
       </Label>
+      <TableView fx:id="tbvMuaVe" layoutX="617.0" layoutY="99.0" onMouseClicked="#getSelected" prefHeight="406.0" prefWidth="481.0" />
+      <TextField fx:id="filterField" layoutX="744.0" layoutY="46.0" prefHeight="25.0" prefWidth="214.0" promptText="Nhập thông tin" styleClass="textfield" stylesheets="@css/addChuyenXe.css" />
+      <Label layoutX="620.0" layoutY="46.0" prefHeight="25.0" prefWidth="124.0" stylesheets="@css/addChuyenXe.css" text="Tìm chuyến xe:" />
+      <Button id="quaylaitrangchu" layoutX="472.0" layoutY="499.0" mnemonicParsing="false" onAction="#QuayLai" prefHeight="50.0" prefWidth="87.0" stylesheets="@css/addChuyenXe.css" text="Quay lại" />
    </children>
 </AnchorPane>

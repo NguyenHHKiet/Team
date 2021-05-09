@@ -11,6 +11,7 @@ import com.mycompany.htbanve.pojo.QLCX;
 import com.mycompany.htbanve.service.JdbcUtils;
 import com.mycompany.htbanve.service.QLBVServices;
 import com.mycompany.htbanve.service.QLCXsServices;
+import com.mycompany.htbanve.service.Utils;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
@@ -46,6 +47,10 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javax.swing.JOptionPane;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.TableCell;
 /**
  *
  * @author Tuan Anh
@@ -74,19 +79,30 @@ public class MuaVeController implements Initializable{
     @FXML
     private TextField txtghe;
     private TextField txtMaGhe;
-    private TableView<QLCX> tbvQLCX;
+    @FXML
+    private TableView<QLCX> tbvMuaVe;
+    @FXML
     private TableColumn<QLCX, Integer> colid;
+    @FXML
     private TableColumn<QLCX, String> colNameCX;
+    @FXML
     private TableColumn<QLCX, String> colbsx;
+    @FXML
     private TableColumn<QLCX, String> colloaixe;
-    private TableColumn<QLCX, String> colngaykh;
+    @FXML
     private TableColumn<QLCX, String> colgiokh;
+    @FXML
+    private TableColumn<QLCX, DatePicker> colngaykh;
+    @FXML
     private TableColumn<QLCX, String> colgiave;
+    @FXML
     private TableColumn<QLCX, String> coltennv;
-    private TableColumn<QLCX, String> colghe;
+    @FXML
     private TableColumn<QLCX, String> colsdtnv;
+    @FXML
+    private TableColumn<QLCX, String> colghe;
+    @FXML
     private TextField filterField;
-    private TableColumn<QLCX, String> colidphanbiet;
     
     ObservableList<QLCX> dataList;
     int index = -1;   
@@ -106,50 +122,99 @@ public class MuaVeController implements Initializable{
         Logger.getLogger(MuaVeController.class.getName()).log(Level.SEVERE, null, ex);
         }
          */
+        try{
+            conn = JdbcUtils.getConnection();
+            tbvMuaVe.setEditable(true);
+            
+            loadTables();
+            loadQLCXData("");
+            this.filterField.textProperty().addListener((obj) -> {
+                loadQLCXData(this.filterField.getText());
+            });
+            
+            UpdateQLCX();
+            FindCX();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(AddChuyenXeController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
 
     }
       
-    public void QuayLaiTC() throws IOException{
-        App.setRoot("TrangChu");
-    }
     @FXML
-    public void SwitchtoTC() throws IOException{
+    public void QuayLai() throws IOException {
         App.setRoot("TrangChu");
     }
+
+    
     // Load dl len table view
     public void UpdateQLCX() throws SQLException{
         ObservableList<QLCX> data = FXCollections.observableArrayList(QLCXsServices.getDataQLCX());
-        tbvQLCX.setItems(data);     
-        colid.setCellValueFactory(new PropertyValueFactory<>("id"));
-        colNameCX.setCellValueFactory(new PropertyValueFactory<>("tencx"));
-        colbsx.setCellValueFactory(new PropertyValueFactory<>("bsx"));
-        colloaixe.setCellValueFactory(new PropertyValueFactory<>("loaixe"));
-        colgiokh.setCellValueFactory(new PropertyValueFactory<>("giokh"));
-        colngaykh.setCellValueFactory(new PropertyValueFactory<>("ngaykh"));
-        colgiave.setCellValueFactory(new PropertyValueFactory<>("giave"));
-        coltennv.setCellValueFactory(new PropertyValueFactory<>("tennv"));
-        colsdtnv.setCellValueFactory(new PropertyValueFactory<>("sdtnv"));
-        colghe.setCellValueFactory(new PropertyValueFactory<>("ghe"));
-        colidphanbiet.setCellValueFactory(new PropertyValueFactory<>("idphanbiet"));
+        tbvMuaVe.setItems(data);     
+        
 
     }
+       void FindCX() throws SQLException {
+
+        dataList = QLCXsServices.getDataQLCX();
+        tbvMuaVe.setItems(dataList);
+        FilteredList<QLCX> filteredData = new FilteredList<>(dataList, b -> true);
+        filterField.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredData.setPredicate(person -> {
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+                String lowerCaSeFilter = newValue.toLowerCase();
+
+                if (person.getTencx().toLowerCase().indexOf(lowerCaSeFilter) != -1) {
+                    return true;
+                } else if (person.getBsx().toLowerCase().indexOf(lowerCaSeFilter) != -1) {
+                    return true;
+                } else if (person.getGiokh().toLowerCase().indexOf(lowerCaSeFilter) != -1) {
+                    return true;
+                } else if (person.getLoaixe().toLowerCase().indexOf(lowerCaSeFilter) != -1) {
+                    return true;
+                } else if (person.getNgaykh().toLowerCase().indexOf(lowerCaSeFilter) != -1) {
+                    return true;
+                } else if (person.getGiave().toLowerCase().indexOf(lowerCaSeFilter) != -1) {
+                    return true;
+                } else if (person.getTennv().toLowerCase().indexOf(lowerCaSeFilter) != -1) {
+                    return true;
+                } else if (person.getGhe().toLowerCase().indexOf(lowerCaSeFilter) != -1) {
+                    return true;
+                } else if (person.getSdtnv().toLowerCase().indexOf(lowerCaSeFilter) != -1) {
+                    return true;
+                } else {
+                    return false;
+                }
+            });
+        });
+        SortedList<QLCX> sortedData = new SortedList<>(filteredData);
+        sortedData.comparatorProperty().bind(tbvMuaVe.comparatorProperty());
+        tbvMuaVe.setItems(sortedData);
+    }
+
     // Lay du lieu tu table view vao textfield
-    void getSelected (MouseEvent event){
-        index = tbvQLCX.getSelectionModel().getSelectedIndex();
-        if(index <= -1){
-            return;
-        }
-        String pattern = "yyyy-MM-dd";
-        txtid.setText(colidphanbiet.getCellData(index));
-        txttencx.setText(colNameCX.getCellData(index));
-        txtbsx.setText(colbsx.getCellData(index));
-        txtloaixe.setText(colloaixe.getCellData(index));
-        txtngaykh.setPromptText(pattern.toLowerCase());
-        txtgiokh.setText(colgiokh.getCellData(index));
-        txtgiave.setText(colgiave.getCellData(index));
-        txttennv.setText(coltennv.getCellData(index));
-        txtsdtnv.setText(colsdtnv.getCellData(index));
-        txtghe.setText(colghe.getCellData(index));
+    @FXML
+    public void getSelected (MouseEvent event){
+        try {
+                    QLCX i = this.tbvMuaVe.getSelectionModel().getSelectedItem();
+                     
+                    txtid.setText(String.valueOf(i.getId()));
+                    txttencx.setText(i.getTencx());
+                    txtbsx.setText(i.getBsx());
+                    txtloaixe.setText(i.getLoaixe());
+                    txtgiokh.setText(i.getGiokh());
+                    txtgiave.setText(i.getGhe());
+                    txttennv.setText(i.getTennv());
+                    txtsdtnv.setText(i.getSdtnv());
+                    txtghe.setText(i.getGhe());
+                    
+                    
+                } catch (SQLException ex) {
+                    Logger.getLogger(AddChuyenXeController.class.getName()).log(Level.SEVERE, null, ex);
+                }
         
     }
     // them ve vao csdl
@@ -245,10 +310,90 @@ public class MuaVeController implements Initializable{
     }
 
     @FXML
-    private void DeleteQLCX(ActionEvent event) {
+    private void DeleteQLBV(ActionEvent event) {
+        
     }
 
     private Parent loadFXML(String trangChu) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    public void loadTables(){
+        
+        TableColumn colid = new TableColumn("ID");
+        colid.setCellValueFactory(new PropertyValueFactory<>("id"));
+        TableColumn colNameCX = new TableColumn("Tên chuyến xe");
+        colNameCX.setCellValueFactory(new PropertyValueFactory<>("tencx"));
+        TableColumn colbsx = new TableColumn("Biển số xe");
+        colbsx.setCellValueFactory(new PropertyValueFactory<>("bsx"));
+        TableColumn colloaixe = new TableColumn("Loại xe");
+        colloaixe.setCellValueFactory(new PropertyValueFactory<>("loaixe"));
+        TableColumn colgiokh = new TableColumn("Gời khởi hành");
+        colgiokh.setCellValueFactory(new PropertyValueFactory<>("giokh"));
+        TableColumn colngaykh = new TableColumn("Ngày khởi hành");
+        colngaykh.setCellValueFactory(new PropertyValueFactory<>("ngaykh"));
+        TableColumn colgiave = new TableColumn("Giá vé");
+        colgiave.setCellValueFactory(new PropertyValueFactory<>("giave"));
+        TableColumn coltennv = new TableColumn("Tên nhân viên");
+        coltennv.setCellValueFactory(new PropertyValueFactory<>("tennv"));
+        TableColumn colsdtnv = new TableColumn("SDT nv");
+        colsdtnv.setCellValueFactory(new PropertyValueFactory<>("sdtnv"));
+        TableColumn colghe = new TableColumn("Số ghế");
+        colghe.setCellValueFactory(new PropertyValueFactory<>("ghe"));
+        
+        TableColumn colAction = new TableColumn();
+        colAction.setCellFactory((obj) -> {
+            Button btn = new Button("Xóa");
+            
+            btn.setOnAction(evt -> {
+                Utils.getBox("Ban chac chan xoa khong?", Alert.AlertType.CONFIRMATION)
+                     .showAndWait().ifPresent(bt -> {
+                         if (bt == ButtonType.OK) {
+                             try {
+                                 TableCell cell = (TableCell) ((Button) evt.getSource()).getParent();
+                                 QLCX p = (QLCX) cell.getTableRow().getItem();
+                                 
+                                 Connection conn = JdbcUtils.getConnection();
+                                 QLCXsServices s = new QLCXsServices(conn);
+                                 
+                                 
+                                 /*if (s.deleteQLCX(p.getId())) {
+                                     Utils.getBox("SUCCESSFUL", Alert.AlertType.INFORMATION).show();
+                                     loadProductData("");
+                                 } else
+                                     Utils.getBox("FAILED", Alert.AlertType.ERROR).show();*/
+                                 conn.close();
+                             } catch (SQLException ex) {
+                                 
+                                 ex.printStackTrace();
+                                 Logger.getLogger(AddChuyenXeController.class.getName()).log(Level.SEVERE, null, ex);
+                             }
+                         }
+                     });
+                
+                
+               
+            });
+            
+            TableCell cell = new TableCell();
+            cell.setGraphic(btn);
+            return cell;
+        });
+        this.tbvMuaVe.getColumns().addAll(colid, colNameCX, colbsx, colloaixe, colgiokh, colngaykh, colgiave, coltennv, colsdtnv, colghe);
+
+    }
+    public void loadQLCXData(String kw) {
+        try {
+            this.tbvMuaVe.getItems().clear();
+
+            Connection conn = JdbcUtils.getConnection();
+            QLCXsServices qls = new QLCXsServices(conn);
+
+            this.tbvMuaVe.setItems(FXCollections.observableList(qls.getDataQLCXs(kw)));//(kw)
+
+            conn.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            Logger.getLogger(AddChuyenXeController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

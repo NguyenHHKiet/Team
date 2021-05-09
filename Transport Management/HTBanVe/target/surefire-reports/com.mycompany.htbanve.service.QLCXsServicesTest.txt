@@ -1,8 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: com.mycompany.htbanve.service.QLCXsServicesTest
 -------------------------------------------------------------------------------
-Tests run: 5, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 8.123 sec <<< FAILURE!
-testGetDataQLCXs(com.mycompany.htbanve.service.QLCXsServicesTest)  Time elapsed: 0.003 sec  <<< ERROR!
+Tests run: 5, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.193 sec <<< FAILURE!
+testGetDataQLCXs(com.mycompany.htbanve.service.QLCXsServicesTest)  Time elapsed: 0 sec  <<< ERROR!
 java.lang.NullPointerException: Cannot invoke "java.sql.Connection.prepareStatement(String)" because "conn" is null
 	at com.mycompany.htbanve.service.QLCXsServices.getDataQLCXs(QLCXsServices.java:37)
 	at com.mycompany.htbanve.service.QLCXsServicesTest.testGetDataQLCXs(QLCXsServicesTest.java:58)

@@ -15,6 +15,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 /**
@@ -23,19 +25,21 @@ import javafx.collections.ObservableList;
  */
 public class QLCXsServices {
     
-    private Connection conn =JdbcUtils.getConnection();
+    private Connection conn = JdbcUtils.getConnection();
 
     public QLCXsServices(Connection conn) {
         this.conn = conn;
     }
     
-    public static List<QLCX> getDataQLCXs() throws SQLException{
-       
-        Connection conn = JdbcUtils.getConnection();
-        
-        String sql = "Select * from qlcx";
-        PreparedStatement stm = conn.prepareStatement(sql);
-       
+    public List<QLCX> getDataQLCXs(String kw) throws SQLException{
+        if (kw == null) {
+            throw new SQLDataException();
+        }
+
+        String sql = "SELECT * FROM qlcx WHERE name like concat('%', ?, '%') ORDER BY id DESC";
+        PreparedStatement stm = this.conn.prepareStatement(sql);
+        stm.setString(1, kw);
+
         ResultSet rs = stm.executeQuery();
         
         
@@ -102,11 +106,22 @@ public class QLCXsServices {
         PreparedStatement pst = conn.prepareStatement(sql);
         pst.execute();
     }
-    public static void DeleteCX(String a) throws SQLException{
-        Connection conn = JdbcUtils.getConnection();
-        String sql = "DELETE FROM qlcx where idQLCX = ?";
-        PreparedStatement pst = conn.prepareStatement(sql);
-        pst.setString(1, a);
-        pst.execute();
+    public boolean deleteQLCX(int id) throws SQLException{
+        try {
+            Connection conn = JdbcUtils.getConnection();
+            String sql = "DELETE FROM qlcx where idQLCX = ?";
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setInt(1, id);
+            
+            int row = stm.executeUpdate();
+            
+            return row > 0;
+        } catch (SQLException ex) {
+            Logger.getLogger(QLCXsServices.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return false;
     }
+    
+
 }

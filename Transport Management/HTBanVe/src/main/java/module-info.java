@@ -7,4 +7,5 @@ module com.mycompany.htbanve {
 
     opens com.mycompany.htbanve to javafx.fxml;
     exports com.mycompany.htbanve;
+    exports com.mycompany.htbanve.pojo; 
 }

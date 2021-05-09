@@ -1,8 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: com.mycompany.htbanve.service.QLBVServicesTest
 -------------------------------------------------------------------------------
-Tests run: 7, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 5.677 sec <<< FAILURE!
-testGetDataQLBV(com.mycompany.htbanve.service.QLBVServicesTest)  Time elapsed: 0.002 sec  <<< ERROR!
+Tests run: 7, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 7.065 sec <<< FAILURE!
+testGetDataQLBV(com.mycompany.htbanve.service.QLBVServicesTest)  Time elapsed: 0.003 sec  <<< ERROR!
 java.lang.NullPointerException: Cannot invoke "java.sql.Connection.createStatement()" because "conn" is null
 	at com.mycompany.htbanve.service.QLBVServices.getDataQLBV(QLBVServices.java:25)
 	at com.mycompany.htbanve.service.QLBVServicesTest.testGetDataQLBV(QLBVServicesTest.java:45)

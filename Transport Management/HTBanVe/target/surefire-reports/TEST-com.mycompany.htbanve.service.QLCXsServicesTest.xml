@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="5" failures="0" name="com.mycompany.htbanve.service.QLCXsServicesTest" time="8.122" errors="1" skipped="0">
+<testsuite tests="5" failures="0" name="com.mycompany.htbanve.service.QLCXsServicesTest" time="0" errors="1" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="java.vm.version" value="16+36-2231"/>
@@ -61,9 +61,9 @@
     <property name="sun.cpu.endian" value="little"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="com.mycompany.htbanve.service.QLCXsServicesTest" name="testAddCX" time="1.719"/>
+  <testcase classname="com.mycompany.htbanve.service.QLCXsServicesTest" name="testAddCX" time="0"/>
   <testcase classname="com.mycompany.htbanve.service.QLCXsServicesTest" name="testGetDataQLCX" time="0"/>
-  <testcase classname="com.mycompany.htbanve.service.QLCXsServicesTest" name="testGetDataQLCXs" time="0.003">
+  <testcase classname="com.mycompany.htbanve.service.QLCXsServicesTest" name="testGetDataQLCXs" time="0">
     <error message="Cannot invoke &quot;java.sql.Connection.prepareStatement(String)&quot; because &quot;conn&quot; is null" type="java.lang.NullPointerException">java.lang.NullPointerException: Cannot invoke &quot;java.sql.Connection.prepareStatement(String)&quot; because &quot;conn&quot; is null
 	at com.mycompany.htbanve.service.QLCXsServices.getDataQLCXs(QLCXsServices.java:37)
 	at com.mycompany.htbanve.service.QLCXsServicesTest.testGetDataQLCXs(QLCXsServicesTest.java:58)
@@ -103,6 +103,6 @@
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
 </error>
   </testcase>
-  <testcase classname="com.mycompany.htbanve.service.QLCXsServicesTest" name="testEditCX" time="6.123"/>
-  <testcase classname="com.mycompany.htbanve.service.QLCXsServicesTest" name="testDeleteCX" time="0.277"/>
+  <testcase classname="com.mycompany.htbanve.service.QLCXsServicesTest" name="testEditCX" time="0"/>
+  <testcase classname="com.mycompany.htbanve.service.QLCXsServicesTest" name="testDeleteCX" time="0"/>
 </testsuite>

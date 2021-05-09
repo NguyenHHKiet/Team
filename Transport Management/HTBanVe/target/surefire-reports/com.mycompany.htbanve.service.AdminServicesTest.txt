@@ -1,8 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: com.mycompany.htbanve.service.AdminServicesTest
 -------------------------------------------------------------------------------
-Tests run: 2, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 60.934 sec <<< FAILURE!
-testGetDataAdmin(com.mycompany.htbanve.service.AdminServicesTest)  Time elapsed: 0.158 sec  <<< ERROR!
+Tests run: 2, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 302.743 sec <<< FAILURE!
+testGetDataAdmin(com.mycompany.htbanve.service.AdminServicesTest)  Time elapsed: 0.162 sec  <<< ERROR!
 java.lang.NullPointerException: Cannot invoke "java.sql.Connection.createStatement()" because "conn" is null
 	at com.mycompany.htbanve.service.AdminServices.getDataAdmin(AdminServices.java:24)
 	at com.mycompany.htbanve.service.AdminServicesTest.testGetDataAdmin(AdminServicesTest.java:60)
