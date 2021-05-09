@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javax.swing.JOptionPane;
@@ -60,10 +61,11 @@ public class QLBVServices {
     }
     public static void addVe(String value1, String value2, String value3, String value4
             ,String value5,String value6,String value7,String value8,String value9,String value10
-            ,String value11, String value12,String value13) throws SQLException{
+            ,String value11, String value12) throws SQLException{
         Connection conn = JdbcUtils.getConnection();
+        String rd = UUID.randomUUID().toString();
         String sql = "INSERT INTO qlbv (QLBVid,QLBVtencx,QLBVbsx,QLBVgiokh,QLBVngaykh"
-                    + ",QLBVgiave,QLBVloaixe,QLBVtenkh,QLBVsdtkh,QLBVtennv,QLBVsdtnv,QLBVghe,idphanbiet)values(?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                    + ",QLBVgiave,QLBVghe,QLBVloaixe,QLBVtennv,QLBVsdtnv,QLBVtenkh,QLBVsdtkh,idphanbiet)values(?,?,?,?,?,?,?,?,?,?,?,?,?)";
             PreparedStatement pst = conn.prepareStatement(sql);                
             pst.setString(1, value1 );
             pst.setString(2,value2);
@@ -77,12 +79,13 @@ public class QLBVServices {
             pst.setString(10,value10);
             pst.setString(11,value11);
             pst.setString(12,value12);
-            pst.setString(13,value13);
+            pst.setString(13,rd);
+            
             pst.execute();   
     }
     public static void GiamGhe(String value1, String value2) throws SQLException{
         Connection conn = JdbcUtils.getConnection();
-        String sql2 = "UPDATE qlcx set QLCXghe= '"+value1+"' where idphanbiet = '"+value2+"' ";
+        String sql2 = "UPDATE qlcx set QLCXghe= '"+value1+"' where idQLCX = '"+value2+"' ";
         PreparedStatement pst = conn.prepareStatement(sql2);
         pst.execute(); 
     }

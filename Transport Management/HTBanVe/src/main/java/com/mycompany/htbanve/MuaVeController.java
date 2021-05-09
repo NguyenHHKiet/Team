@@ -63,6 +63,10 @@ public class MuaVeController implements Initializable{
     @FXML
     private TextField txtgiokh;
     @FXML
+    private TextField txttenkh;
+    @FXML
+    private TextField txtsdtkh;
+    @FXML
     private TextField txttennv;
     @FXML
     private TextField txtsdtnv;
@@ -73,9 +77,7 @@ public class MuaVeController implements Initializable{
     @FXML
     private TextField txtid;
     @FXML
-    private DatePicker txtngaykh;
-    private TextField txttenkh;
-    private TextField txtsdtkh;
+    private DatePicker txtngaykh; 
     @FXML
     private TextField txtghe;
     private TextField txtMaGhe;
@@ -96,6 +98,10 @@ public class MuaVeController implements Initializable{
     @FXML
     private TableColumn<QLCX, String> colgiave;
     @FXML
+    private TableColumn<QLCX, String> coltenkh;
+    @FXML
+    private TableColumn<QLCX, String> colsdtkh;
+    @FXML
     private TableColumn<QLCX, String> coltennv;
     @FXML
     private TableColumn<QLCX, String> colsdtnv;
@@ -114,25 +120,18 @@ public class MuaVeController implements Initializable{
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        /*
-        try {
-        UpdateQLCX();
-        FindCX();
-        } catch (SQLException ex) {
-        Logger.getLogger(MuaVeController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-         */
+       
         try{
             conn = JdbcUtils.getConnection();
             tbvMuaVe.setEditable(true);
             
             loadTables();
-            loadQLCXData("");
+            loadQLBVData("");
             this.filterField.textProperty().addListener((obj) -> {
-                loadQLCXData(this.filterField.getText());
+                loadQLBVData(this.filterField.getText());
             });
             
-            UpdateQLCX();
+//            UpdateQLBV();
             FindCX();
             
         } catch (SQLException ex) {
@@ -149,51 +148,13 @@ public class MuaVeController implements Initializable{
 
     
     // Load dl len table view
-    public void UpdateQLCX() throws SQLException{
-        ObservableList<QLCX> data = FXCollections.observableArrayList(QLCXsServices.getDataQLCX());
-        tbvMuaVe.setItems(data);     
-        
+//    public void UpdateQLBV() throws SQLException{    
+//        conn = JdbcUtils.getConnection();
+//        ObservableList<QLBV> data = FXCollections.observableArrayList();
+//       
+//
+//    }
 
-    }
-       void FindCX() throws SQLException {
-
-        dataList = QLCXsServices.getDataQLCX();
-        tbvMuaVe.setItems(dataList);
-        FilteredList<QLCX> filteredData = new FilteredList<>(dataList, b -> true);
-        filterField.textProperty().addListener((observable, oldValue, newValue) -> {
-            filteredData.setPredicate(person -> {
-                if (newValue == null || newValue.isEmpty()) {
-                    return true;
-                }
-                String lowerCaSeFilter = newValue.toLowerCase();
-
-                if (person.getTencx().toLowerCase().indexOf(lowerCaSeFilter) != -1) {
-                    return true;
-                } else if (person.getBsx().toLowerCase().indexOf(lowerCaSeFilter) != -1) {
-                    return true;
-                } else if (person.getGiokh().toLowerCase().indexOf(lowerCaSeFilter) != -1) {
-                    return true;
-                } else if (person.getLoaixe().toLowerCase().indexOf(lowerCaSeFilter) != -1) {
-                    return true;
-                } else if (person.getNgaykh().toLowerCase().indexOf(lowerCaSeFilter) != -1) {
-                    return true;
-                } else if (person.getGiave().toLowerCase().indexOf(lowerCaSeFilter) != -1) {
-                    return true;
-                } else if (person.getTennv().toLowerCase().indexOf(lowerCaSeFilter) != -1) {
-                    return true;
-                } else if (person.getGhe().toLowerCase().indexOf(lowerCaSeFilter) != -1) {
-                    return true;
-                } else if (person.getSdtnv().toLowerCase().indexOf(lowerCaSeFilter) != -1) {
-                    return true;
-                } else {
-                    return false;
-                }
-            });
-        });
-        SortedList<QLCX> sortedData = new SortedList<>(filteredData);
-        sortedData.comparatorProperty().bind(tbvMuaVe.comparatorProperty());
-        tbvMuaVe.setItems(sortedData);
-    }
 
     // Lay du lieu tu table view vao textfield
     @FXML
@@ -206,10 +167,13 @@ public class MuaVeController implements Initializable{
                     txtbsx.setText(i.getBsx());
                     txtloaixe.setText(i.getLoaixe());
                     txtgiokh.setText(i.getGiokh());
-                    txtgiave.setText(i.getGhe());
+                    txtgiave.setText(i.getGiave());
+                    txtghe.setText(i.getGhe());
                     txttennv.setText(i.getTennv());
                     txtsdtnv.setText(i.getSdtnv());
-                    txtghe.setText(i.getGhe());
+                    
+//                    txtngaykh
+                    
                     
                     
                 } catch (SQLException ex) {
@@ -222,10 +186,10 @@ public class MuaVeController implements Initializable{
          conn = JdbcUtils.getConnection();
         //date
         // dieu kien k cho phep de trong o dl
-        if ("".equals(txtid.getText()) || "".equals(txttencx.getText()) || "".equals(txtbsx.getText()) 
-                || "".equals(txtgiokh.getText()) || "".equals(txtngaykh.getValue().toString()) || "".equals(txtgiave.getText()) 
-                || "".equals(txttennv.getText()) || "".equals(txtsdtnv.getText()) || "".equals(txtloaixe.getText()) 
-                || "".equals(txttenkh.getText()) || "".equals(txtsdtkh.getText()) || "".equals(txtghe.getText()))
+        if ( "".equals(txttencx.getText()) || "".equals(txtbsx.getText()) 
+                || "".equals(txtgiokh.getText()) || (txtngaykh.getValue()) == null || "".equals(txtgiave.getText()) 
+                || "".equals(txttenkh.getText()) || "".equals(txtsdtkh.getText()) || "".equals(txtloaixe.getText()) 
+                || "".equals(txttennv.getText()) || "".equals(txtsdtnv.getText()) || "".equals(txtghe.getText()))
         {            
             JOptionPane.showMessageDialog(null, "Chua nhap du thong tin","about",JOptionPane.INFORMATION_MESSAGE);
         }
@@ -236,19 +200,22 @@ public class MuaVeController implements Initializable{
         {                 
             try {
                 String rm = UUID.randomUUID().toString(); 
-                DateFormat df = new SimpleDateFormat("dd MMM yyyy");
-                LocalDate localDate = txtngaykh.getValue();
-                Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
-                Date date = (Date) Date.from(instant);
-                
-                QLBVServices.addVe(rm,txttencx.getText() , txtbsx.getText(),txtgiokh.getText(), localDate.toString()/*txtngaykh.getText()*/ , txtgiave.getText()
-                        , txtloaixe.getText(), txttenkh.getText(), txtsdtkh.getText(), txttennv.getText(), txtsdtnv.getText()
-                        , txtMaGhe.getText(), txtid.getText());          
+//                DateFormat df = new SimpleDateFormat("dd MMM yyyy");
+//                LocalDate localDate = txtngaykh.getValue();
+//                Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
+//                Date date = (Date) Date.from(instant);
+                //12
+                         
                 try {
-                    Integer a = (Integer.parseInt(txtghe.getText()) - 1);
-                    String value1 = a.toString();
+                    
+                    int a = Integer.parseInt(txtghe.getText()) - 1;
+                    String value1 = String.valueOf(a);
                     String value2 = txtid.getText();
-                   QLBVServices.GiamGhe(value1, value2);
+                    QLBVServices.GiamGhe(value1, value2);
+                    QLBVServices.addVe(rm,txttencx.getText() , txtbsx.getText(),txtgiokh.getText(), txtngaykh.getValue().toString()
+                         , txtgiave.getText(),txtghe.getText()
+                         , txtloaixe.getText(), txttennv.getText(), txtsdtnv.getText(), txttenkh.getText(), txtsdtkh.getText()
+                         ); 
                 } catch (SQLException e) {
                     JOptionPane.showMessageDialog(null, e);
                 }
@@ -256,7 +223,7 @@ public class MuaVeController implements Initializable{
                         + " Lưu ý : Hãy đến quầy nhân viên để nhận vé trong 30p trước giờ khởi hành !!! \n"
                         + "!!!!Quá 30p trước giờ khởi hành vé sẽ bị hủy!!!!\n"
                         + "Chân thành cảm ơn quý khách!!!");
-                UpdateQLCX();
+//                UpdateQLBV();
                 //FindCX();
             } catch (SQLException e) {
                 JOptionPane.showMessageDialog(null,e);
@@ -264,10 +231,10 @@ public class MuaVeController implements Initializable{
         }        
     }
     
-    /*
+    
     void FindCX() throws SQLException {
         dataList = QLCXsServices.getDataQLCX();
-        tbvQLCX.setItems(dataList);
+        tbvMuaVe.setItems(dataList);
         FilteredList<QLCX> filteredData = new FilteredList<>(dataList, b -> true);
         filterField.textProperty().addListener((observable, oldValue, newValue) -> {
         filteredData.setPredicate(person -> {
@@ -299,24 +266,17 @@ public class MuaVeController implements Initializable{
             });                                                                             
         });
         SortedList<QLCX> sortedData = new SortedList<>(filteredData);
-        sortedData.comparatorProperty().bind(tbvQLCX.comparatorProperty());
-        tbvQLCX.setItems(sortedData);
+        sortedData.comparatorProperty().bind(tbvMuaVe.comparatorProperty());
+        tbvMuaVe.setItems(sortedData);
     }
     
-    */
+    
+//khach hàng không được tự dộng xóa vé
+    
 
-    @FXML
-    private void Edit(ActionEvent event) {
-    }
-
-    @FXML
-    private void DeleteQLBV(ActionEvent event) {
-        
-    }
-
-    private Parent loadFXML(String trangChu) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+//    private Parent loadFXML(String trangChu) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//    }
     public void loadTables(){
         
         TableColumn colid = new TableColumn("ID");
@@ -333,55 +293,19 @@ public class MuaVeController implements Initializable{
         colngaykh.setCellValueFactory(new PropertyValueFactory<>("ngaykh"));
         TableColumn colgiave = new TableColumn("Giá vé");
         colgiave.setCellValueFactory(new PropertyValueFactory<>("giave"));
+        TableColumn colghe = new TableColumn("Số ghế");
+        colghe.setCellValueFactory(new PropertyValueFactory<>("ghe"));
         TableColumn coltennv = new TableColumn("Tên nhân viên");
         coltennv.setCellValueFactory(new PropertyValueFactory<>("tennv"));
         TableColumn colsdtnv = new TableColumn("SDT nv");
         colsdtnv.setCellValueFactory(new PropertyValueFactory<>("sdtnv"));
-        TableColumn colghe = new TableColumn("Số ghế");
-        colghe.setCellValueFactory(new PropertyValueFactory<>("ghe"));
         
-        TableColumn colAction = new TableColumn();
-        colAction.setCellFactory((obj) -> {
-            Button btn = new Button("Xóa");
-            
-            btn.setOnAction(evt -> {
-                Utils.getBox("Ban chac chan xoa khong?", Alert.AlertType.CONFIRMATION)
-                     .showAndWait().ifPresent(bt -> {
-                         if (bt == ButtonType.OK) {
-                             try {
-                                 TableCell cell = (TableCell) ((Button) evt.getSource()).getParent();
-                                 QLCX p = (QLCX) cell.getTableRow().getItem();
-                                 
-                                 Connection conn = JdbcUtils.getConnection();
-                                 QLCXsServices s = new QLCXsServices(conn);
-                                 
-                                 
-                                 /*if (s.deleteQLCX(p.getId())) {
-                                     Utils.getBox("SUCCESSFUL", Alert.AlertType.INFORMATION).show();
-                                     loadProductData("");
-                                 } else
-                                     Utils.getBox("FAILED", Alert.AlertType.ERROR).show();*/
-                                 conn.close();
-                             } catch (SQLException ex) {
-                                 
-                                 ex.printStackTrace();
-                                 Logger.getLogger(AddChuyenXeController.class.getName()).log(Level.SEVERE, null, ex);
-                             }
-                         }
-                     });
-                
-                
-               
-            });
-            
-            TableCell cell = new TableCell();
-            cell.setGraphic(btn);
-            return cell;
-        });
-        this.tbvMuaVe.getColumns().addAll(colid, colNameCX, colbsx, colloaixe, colgiokh, colngaykh, colgiave, coltennv, colsdtnv, colghe);
+        
+
+        this.tbvMuaVe.getColumns().addAll(colNameCX, colbsx, colloaixe, colgiokh, colngaykh, colgiave, colghe, coltennv, colsdtnv);
 
     }
-    public void loadQLCXData(String kw) {
+    public void loadQLBVData(String kw) {
         try {
             this.tbvMuaVe.getItems().clear();
 

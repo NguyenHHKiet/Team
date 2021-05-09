@@ -32,6 +32,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
@@ -40,6 +41,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.util.Callback;
 import javax.swing.GroupLayout.Group;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -187,11 +189,12 @@ public class AddChuyenXeController implements Initializable {
                     txtbsx.setText(i.getBsx());
                     txtloaixe.setText(i.getLoaixe());
                     txtgiokh.setText(i.getGiokh());
-                    txtgiave.setText(i.getGhe());
+                    txtgiave.setText(i.getGiave());
+                    txtghe.setText(i.getGhe());
                     txttennv.setText(i.getTennv());
                     txtsdtnv.setText(i.getSdtnv());
-                    txtghe.setText(i.getGhe());
                     
+//                    txtngaykh.setDayCellFactory((Callback<DatePicker, DateCell>) i.getNgaykh());
                     
                 } catch (SQLException ex) {
                     Logger.getLogger(AddChuyenXeController.class.getName()).log(Level.SEVERE, null, ex);
@@ -205,37 +208,11 @@ public class AddChuyenXeController implements Initializable {
     public void UpdateQLCX() throws SQLException {
         conn = JdbcUtils.getConnection();
         ObservableList<QLCX> data = FXCollections.observableArrayList();
-//        QLCXsServices results = new QLCXsServices();
-//        List<QLCX> rs = results.getDataQLCXs();
-//        rs.forEach(c->{
-//            QLCX QLCXDetails = new QLCX();
-//            QLCXDetails.setId(c.getId());
-//            QLCXDetails.setTencx(c.getTencx());
-//            QLCXDetails.setBsx(c.getBsx());
-//            QLCXDetails.setLoaixe(c.getLoaixe());
-//            QLCXDetails.setGiokh(c.getGiokh());
-//            QLCXDetails.setNgaykh(c.getNgaykh());
-//            QLCXDetails.setGiave(c.getGiave());
-//            QLCXDetails.setTennv(c.getTennv());
-//            QLCXDetails.setSdtnv(c.getSdtnv());
-//            QLCXDetails.setGhe(c.getGhe());
-//            
-//             data.add(QLCXDetails)
-//        });
-//        tbvQLCX.setItems(data);    
-//        colid.setCellValueFactory(new PropertyValueFactory<>("id"));
-//        colNameCX.setCellValueFactory(new PropertyValueFactory<>("tencx"));
-//        colbsx.setCellValueFactory(new PropertyValueFactory<>("bsx"));
-//        colloaixe.setCellValueFactory(new PropertyValueFactory<>("loaixe"));
-//        colgiokh.setCellValueFactory(new PropertyValueFactory<>("giokh"));
-//        colngaykh.setCellValueFactory(new PropertyValueFactory<>("ngaykh"));
-//        colgiave.setCellValueFactory(new PropertyValueFactory<>("giave"));
-//        coltennv.setCellValueFactory(new PropertyValueFactory<>("tennv"));
-//        colsdtnv.setCellValueFactory(new PropertyValueFactory<>("sdtnv"));
-//        colghe.setCellValueFactory(new PropertyValueFactory<>("ghe"));
+        tbvQLCX.setItems(data);
+    
 //       
 //        ResultSet rs = conn.createStatement().executeQuery("select * from htbanve.qlcx");
-//        //tbvQLCX.setItems(data);
+//        //
 //        
 //        
 //        /**/
@@ -255,25 +232,6 @@ public class AddChuyenXeController implements Initializable {
 
     }
 
-    /*public void show() throws SQLException{
-        ArrayList<QLCX> list = UpdateQLCX();
-        //DefaultTableModel model = (DefaultTableModel)tbvQLCX.getModel();
-        ObservableList<QLCX> data = FXCollections.observableArrayList(QLCXsServices.getDataQLCX());
-        Object[] row = new Object[10];
-        for(int i =0 ;i < list.size();i++){
-            row[0] = list.get(i).getId();
-            row[1] = list.get(i).getTennv();
-            row[2] = list.get(i).getBsx();
-            row[3] = list.get(i).getLoaixe();
-            row[4] = list.get(i).getGiokh();
-            row[5] = list.get(i).getNgaykh();
-            row[6] = list.get(i).getGiave();
-            row[7] = list.get(i).getTennv();
-            row[8] = list.get(i).getSdtnv();
-            row[9] = list.get(i).getGhe();
-
-        }
-    }*/
     @FXML
     public void AddQLCX() throws SQLException {
         conn = JdbcUtils.getConnection();
@@ -327,6 +285,8 @@ public class AddChuyenXeController implements Initializable {
             if (s.deleteQLCX(p.getId()) == true  ) {
                 Utils.getBox("SUCCESSFUL", Alert.AlertType.INFORMATION).show();
                 loadQLCXData("");
+                UpdateQLCX();
+                
             } else {
                 Utils.getBox("FAILED", Alert.AlertType.ERROR).show();
             }
@@ -400,6 +360,9 @@ public class AddChuyenXeController implements Initializable {
 
         TableColumn colgiave = new TableColumn("Giá Vé");
         colgiave.setCellValueFactory(new PropertyValueFactory("giave"));
+        
+        TableColumn colghe = new TableColumn("Ghế");
+        colghe.setCellValueFactory(new PropertyValueFactory("ghe"));
 
         TableColumn coltennv = new TableColumn("Tên Nhân Viên");
         coltennv.setCellValueFactory(new PropertyValueFactory("tennv"));
@@ -407,68 +370,47 @@ public class AddChuyenXeController implements Initializable {
         TableColumn colsdtnv = new TableColumn("SĐT Nhân Viên");
         colsdtnv.setCellValueFactory(new PropertyValueFactory("sdtnv"));
 
-        TableColumn colghe = new TableColumn("Ghế");
-        colghe.setCellValueFactory(new PropertyValueFactory("ghe"));
-//        TableColumn colid = new TableColumn("ID");
-//        colid.setCellValueFactory(new PropertyValueFactory<>("id"));
-//        TableColumn colNameCX = new TableColumn("Tên chuyến xe");
-//        colNameCX.setCellValueFactory(new PropertyValueFactory<>("tencx"));
-//        TableColumn colbsx = new TableColumn("Biển số xe");
-//        colbsx.setCellValueFactory(new PropertyValueFactory<>("bsx"));
-//        TableColumn colloaixe = new TableColumn("Loại xe");
-//        colloaixe.setCellValueFactory(new PropertyValueFactory<>("loaixe"));
-//        TableColumn colgiokh = new TableColumn("Gời khởi hành");
-//        colgiokh.setCellValueFactory(new PropertyValueFactory<>("giokh"));
-//        TableColumn colngaykh = new TableColumn("Ngày khởi hành");
-//        colngaykh.setCellValueFactory(new PropertyValueFactory<>("ngaykh"));
-//        TableColumn colgiave = new TableColumn("Giá vé");
-//        colgiave.setCellValueFactory(new PropertyValueFactory<>("giave"));
-//        TableColumn coltennv = new TableColumn("Tên nhân viên");
-//        coltennv.setCellValueFactory(new PropertyValueFactory<>("tennv"));
-//        TableColumn colsdtnv = new TableColumn("SDT nv");
-//        colsdtnv.setCellValueFactory(new PropertyValueFactory<>("sdtnv"));
-//        TableColumn colghe = new TableColumn("Số ghế");
-//        colghe.setCellValueFactory(new PropertyValueFactory<>("ghe"));
-//        
-        TableColumn colAction = new TableColumn();
-        colAction.setCellFactory((obj) -> {
-            Button btn = new Button("Xóa");
-            
-            btn.setOnAction(evt -> {
-                Utils.getBox("Ban chac chan xoa khong?", Alert.AlertType.CONFIRMATION)
-                     .showAndWait().ifPresent(bt -> {
-                         if (bt == ButtonType.OK) {
-                             try {
-                                 TableCell cell = (TableCell) ((Button) evt.getSource()).getParent();
-                                 QLCX p = (QLCX) cell.getTableRow().getItem();
-                                 
-                                 Connection conn = JdbcUtils.getConnection();
-                                 QLCXsServices s = new QLCXsServices(conn);
-                                 
-                                 if (s.deleteQLCX(p.getId()) == true) {
-                                     Utils.getBox("SUCCESSFUL", Alert.AlertType.INFORMATION).show();
-                                     loadQLCXData("");
-                                 } else
-                                     Utils.getBox("FAILED", Alert.AlertType.ERROR).show();
-                                 /**/
-                                 conn.close();
-                             } catch (SQLException ex) {
-                                 
-                                 ex.printStackTrace();
-                                 Logger.getLogger(AddChuyenXeController.class.getName()).log(Level.SEVERE, null, ex);
-                             }
-                         }
-                     });
-                
-                
-               
-            });
-            
-            TableCell cell = new TableCell();
-            cell.setGraphic(btn);
-            return cell;
-        });
-        this.tbvQLCX.getColumns().addAll(colid, colNameCX, colbsx, colloaixe, colgiokh, colngaykh, colgiave, coltennv, colsdtnv, colghe);
+        
+  
+//        TableColumn colAction = new TableColumn();
+//        colAction.setCellFactory((obj) -> {
+//            Button btn = new Button("Xóa");
+//            
+//            btn.setOnAction(evt -> {
+//                Utils.getBox("Ban chac chan xoa khong?", Alert.AlertType.CONFIRMATION)
+//                     .showAndWait().ifPresent(bt -> {
+//                         if (bt == ButtonType.OK) {
+//                             try {
+//                                 TableCell cell = (TableCell) ((Button) evt.getSource()).getParent();
+//                                 QLCX p = (QLCX) cell.getTableRow().getItem();
+//                                 
+//                                 Connection conn = JdbcUtils.getConnection();
+//                                 QLCXsServices s = new QLCXsServices(conn);
+//                                 
+//                                 if (s.deleteQLCX(p.getId()) == true) {
+//                                     Utils.getBox("SUCCESSFUL", Alert.AlertType.INFORMATION).show();
+//                                     loadQLCXData("");
+//                                 } else
+//                                     Utils.getBox("FAILED", Alert.AlertType.ERROR).show();
+//                                 /**/
+//                                 conn.close();
+//                             } catch (SQLException ex) {
+//                                 
+//                                 ex.printStackTrace();
+//                                 Logger.getLogger(AddChuyenXeController.class.getName()).log(Level.SEVERE, null, ex);
+//                             }
+//                         }
+//                     });
+//                
+//                
+//               
+//            });
+//            
+//            TableCell cell = new TableCell();
+//            cell.setGraphic(btn);
+//            return cell;
+//        });
+        this.tbvQLCX.getColumns().addAll(colid, colNameCX, colbsx, colloaixe, colgiokh, colngaykh, colgiave, colghe, coltennv, colsdtnv);
 
     }
 

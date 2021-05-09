@@ -19,9 +19,9 @@
 
 <AnchorPane id="AnchorPane" style="-fx-background-color: #c8dcf4;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.htbanve.AddChuyenXeController">
    <children>
-      <AnchorPane layoutX="174.0" layoutY="48.0" style="-fx-background-color: #2F2A2B;" visible="false" />
+      <AnchorPane layoutX="151.0" layoutY="38.0" style="-fx-background-color: #2F2A2B;" visible="false" />
       <Button id="quaylaitrangchu" layoutX="1165.0" layoutY="79.0" mnemonicParsing="false" onAction="#QuayLai" stylesheets="@css/addChuyenXe.css" text="Quay lại" />
-      <GridPane layoutX="54.0" layoutY="137.0" stylesheets="@css/addChuyenXe.css">
+      <GridPane layoutX="31.0" layoutY="127.0" stylesheets="@css/addChuyenXe.css">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="359.0" minWidth="10.0" prefWidth="123.6" />
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="617.0" minWidth="10.0" prefWidth="380.4" />
@@ -65,21 +65,21 @@
             <TextField fx:id="txtghe" promptText="Nhập số ghế còn trống" styleClass="textfield" GridPane.columnIndex="1" GridPane.rowIndex="7" />
          </children>
       </GridPane>
-      <TableView fx:id="tbvQLCX" layoutX="591.0" layoutY="146.0" onMouseClicked="#getSelected" stylesheets="@css/addChuyenXe.css" />
-      <Button layoutX="328.0" layoutY="484.0" mnemonicParsing="false" onAction="#Edit" stylesheets="@css/addChuyenXe.css" text="CẬP NHẬT">
+      <TableView fx:id="tbvQLCX" layoutX="563.0" layoutY="127.0" onMouseClicked="#getSelected" stylesheets="@css/addChuyenXe.css" />
+      <Button layoutX="305.0" layoutY="474.0" mnemonicParsing="false" onAction="#Edit" stylesheets="@css/addChuyenXe.css" text="CẬP NHẬT">
          <effect>
             <DropShadow color="#b6c9d6" offsetX="5.0" offsetY="4.0" radius="11.192499999999999" width="25.77" />
          </effect></Button>
-      <Button layoutX="182.0" layoutY="484.0" mnemonicParsing="false" onAction="#AddQLCX" stylesheets="@css/addChuyenXe.css" text="LƯU CHUYẾN XE">
+      <Button layoutX="159.0" layoutY="474.0" mnemonicParsing="false" onAction="#AddQLCX" stylesheets="@css/addChuyenXe.css" text="LƯU CHUYẾN XE">
          <effect>
             <DropShadow blurType="TWO_PASS_BOX" color="#b1afd5" offsetX="5.0" offsetY="4.0" radius="14.17" width="37.68" />
          </effect></Button>
-      <Button layoutX="440.0" layoutY="484.0" mnemonicParsing="false" onAction="#DeleteQLCX" stylesheets="@css/addChuyenXe.css" text="XÓA">
+      <Button layoutX="417.0" layoutY="474.0" mnemonicParsing="false" onAction="#DeleteQLCX" stylesheets="@css/addChuyenXe.css" text="XÓA">
          <effect>
             <DropShadow color="#bbd0ed" offsetX="5.0" offsetY="4.0" />
          </effect></Button>
       <TextField fx:id="filterField" layoutX="728.0" layoutY="75.0" promptText="Nhập thông tin" styleClass="textfield" stylesheets="@css/addChuyenXe.css" />
-      <Label alignment="CENTER" layoutX="169.0" layoutY="56.0" stylesheets="@css/title.css" text="THÊM CHUYẾN XE" textFill="#f08610">
+      <Label alignment="CENTER" layoutX="146.0" layoutY="46.0" stylesheets="@css/title.css" text="THÊM CHUYẾN XE" textFill="#f08610">
          <font>
             <Font name="SVN-GothamBlack" size="39.0" />
          </font>

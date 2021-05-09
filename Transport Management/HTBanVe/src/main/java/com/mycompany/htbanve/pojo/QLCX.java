@@ -13,7 +13,8 @@ import javafx.util.Callback;
  */
 public class QLCX {
     private int id;
-    private String tencx,bsx,giokh,giave,tennv,sdtnv,loaixe,ghe,ngaykh,idphanbiet;
+    private String tencx,bsx,giokh,giave,tennv,sdtnv,loaixe,ghe,idphanbiet;
+    private String ngaykh;
     public QLCX(int id, String tencx, String bsx,String loaixe, String giokh, String ngaykh, String giave, String tennv, String sdtnv,String ghe,String idphanbiet) {
         this.id = id;
         this.tencx = tencx;
