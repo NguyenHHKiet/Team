@@ -6,8 +6,10 @@
 package com.mycompany.htbanve;
 import com.mycompany.htbanve.pojo.PrintTicket;
 import com.mycompany.htbanve.pojo.QLBV;
+import com.mycompany.htbanve.pojo.QLCX;
 import com.mycompany.htbanve.service.JdbcUtils;
 import com.mycompany.htbanve.service.QLBVServices;
+import com.mycompany.htbanve.service.Utils;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
@@ -42,6 +44,7 @@ import javax.swing.JOptionPane;
  * @author Tuan Anh
  */
 public class QuanLyVeXeController implements Initializable {
+
     @FXML
     private TextField txttencx;
 
@@ -73,9 +76,15 @@ public class QuanLyVeXeController implements Initializable {
     private TextField txtsoghe;
     @FXML
     private TextField txtidrandom;
-    private TextField txtngayht;
-    private TextField txtgioht;
+//    @FXML
+//    private TextField txtngayht;
+//    @FXML
+//    private TextField txtgioht;
+    
+    @FXML
     private TableView<QLBV> tbvQLBV;
+    @FXML
+    private TableColumn<QLBV, String> colidrandom;
     @FXML
     private TableColumn<QLBV, String> colNameCX;
     @FXML
@@ -89,28 +98,33 @@ public class QuanLyVeXeController implements Initializable {
     @FXML
     private TableColumn<QLBV, String> colgiave;
     @FXML
+    private TableColumn<QLBV, String> colghe;
+    @FXML
+    private TableColumn<QLBV, String> coltenkh;
+    @FXML
+    private TableColumn<QLBV, String> colsdtkh;
+    @FXML
     private TableColumn<QLBV, String> coltennv;
     @FXML
     private TableColumn<QLBV, String> colsdtnv;
-    private TableColumn<QLBV, String> coltenkh;
     @FXML
-    private TableColumn<QLBV, String> colghe;
-    private TableColumn<QLBV, String> colsdtkh;
-    private TextField filterField;
-    private TableColumn<QLBV, String> colidrandom;
     private TableColumn<QLBV, String> colidphanbiet;
+    @FXML
+    private TextField filterField;
+    
     private TextField txtidht;
     
     int index = -1;
     ObservableList<QLBV> dataList;
     Connection conn = null;
     ResultSet rs = null;
-    ResultSet rs1 = null;
     PreparedStatement pst = null;
-    @FXML
-    private TableView<?> tbvQLCX;
-    @FXML
-    private TableColumn<?, ?> colid;
+    ResultSet rs1 = null;
+    
+//    @FXML
+//    private TableView<?> tbvQLCX;
+//    @FXML
+//    private TableColumn<?, ?> colid;
     /**
      * Initializes the controller class.
      * @param url
@@ -118,12 +132,19 @@ public class QuanLyVeXeController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        conn = JdbcUtils.getConnection();
+        tbvQLBV.setEditable(true);
+            
+        loadTables();
+        loadQLBVData("");
+
         try {
-            // lay ham bo vao main tu dong load
+            
+           
             UpdateQLBV();
             FindCX();
-            txtngayht.setText(LocalDate.now().toString());
-            txtgioht.setText(LocalTime.now().toString().substring(0, 5));
+//            txtngayht.setText(LocalDate.now().toString());
+//            txtgioht.setText(LocalTime.now().toString().substring(0, 5));
             
         } catch (SQLException ex) {
             Logger.getLogger(MuaVeController.class.getName()).log(Level.SEVERE, null, ex);
@@ -133,43 +154,87 @@ public class QuanLyVeXeController implements Initializable {
     public void QuayLaiTC() throws IOException{
         App.setRoot("ChonChucNang");
     }
+    
+    
+    private void loadTables() {
+        TableColumn colid = new TableColumn("ID");
+        colid.setCellValueFactory(new PropertyValueFactory("id"));
+
+        TableColumn colNameCX = new TableColumn("Tên Chuyến Xe");
+        colNameCX.setCellValueFactory(new PropertyValueFactory("tencx"));
+
+        TableColumn colbsx = new TableColumn("Biển Số Xe");
+        colbsx.setCellValueFactory(new PropertyValueFactory("bsx"));
+
+        TableColumn colloaixe = new TableColumn("Loại Xe");
+        colloaixe.setCellValueFactory(new PropertyValueFactory("loaixe"));
+
+        TableColumn colgiokh = new TableColumn("Giờ Khởi Hành");
+        colgiokh.setCellValueFactory(new PropertyValueFactory("giokh"));
+
+        TableColumn colngaykh = new TableColumn("Ngày Khởi Hành");
+        colngaykh.setCellValueFactory(new PropertyValueFactory("ngaykh"));
+
+        TableColumn colgiave = new TableColumn("Giá Vé");
+        colgiave.setCellValueFactory(new PropertyValueFactory("giave"));
+        
+        TableColumn coltenkh = new TableColumn("Tên Khách Hàng");
+        coltenkh.setCellValueFactory(new PropertyValueFactory("tenkh"));
+        
+        TableColumn colsdtkh = new TableColumn("SĐT Khách Hàng");
+        colsdtkh.setCellValueFactory(new PropertyValueFactory("sdtkh"));
+
+        TableColumn coltennv = new TableColumn("Tên Nhân Viên");
+        coltennv.setCellValueFactory(new PropertyValueFactory("tennv"));
+
+        TableColumn colsdtnv = new TableColumn("SĐT Nhân Viên");
+        colsdtnv.setCellValueFactory(new PropertyValueFactory("sdtnv"));
+
+        TableColumn colghe = new TableColumn("Ghế");
+        colghe.setCellValueFactory(new PropertyValueFactory("ghe"));
+        this.tbvQLBV.getColumns().addAll(colid, colNameCX, colbsx, colloaixe, colngaykh, colgiokh, colgiave, colghe, coltenkh, colsdtkh, coltennv, colsdtnv);
+
+    }
+
+    public void loadQLBVData(String kw) {
+        try {
+            this.tbvQLBV.getItems().clear();
+
+            Connection conn = JdbcUtils.getConnection();
+            QLBVServices qls = new QLBVServices(conn);
+            this.tbvQLBV.setItems(FXCollections.observableList(qls.getDataQLBV(kw)));
+            conn.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            Logger.getLogger(AddChuyenXeController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    
     // Load dl len table view
     public void UpdateQLBV() throws SQLException{
-        ObservableList<QLBV> data = FXCollections.observableArrayList(QLBVServices.getDataQLBV2()); 
-        tbvQLBV.setItems(data);
-        colidrandom.setCellValueFactory(new PropertyValueFactory<>("id"));
-        colNameCX.setCellValueFactory(new PropertyValueFactory<>("tencx"));
-        colbsx.setCellValueFactory(new PropertyValueFactory<>("bsx"));
-        colloaixe.setCellValueFactory(new PropertyValueFactory<>("loaixe"));
-        colgiokh.setCellValueFactory(new PropertyValueFactory<>("giokh"));
-        colngaykh.setCellValueFactory(new PropertyValueFactory<>("ngaykh"));
-        colgiave.setCellValueFactory(new PropertyValueFactory<>("giave"));
-        coltennv.setCellValueFactory(new PropertyValueFactory<>("tennv"));
-        colsdtnv.setCellValueFactory(new PropertyValueFactory<>("sdtnv"));
-        coltenkh.setCellValueFactory(new PropertyValueFactory<>("tenkh"));
-        colsdtkh.setCellValueFactory(new PropertyValueFactory<>("sdtkh"));
-        colghe.setCellValueFactory(new PropertyValueFactory<>("ghe"));
-        colidphanbiet.setCellValueFactory(new PropertyValueFactory<>("idphanbiet"));
+        conn = JdbcUtils.getConnection();
+        ObservableList<QLBV> data = FXCollections.observableArrayList();
+//        tbvQLBV.setItems(data);
     }
     // Lay du lieu tu table view vao textfield
     @FXML
-    void getSelected (MouseEvent event){
-        index = tbvQLBV.getSelectionModel().getSelectedIndex();
-        if(index <= -1){
-            return;
-        }
-        txtidrandom.setText(colidrandom.getCellData(index));
-        txttencx.setText(colNameCX.getCellData(index));
-        txtbsx.setText(colbsx.getCellData(index));
-        txtloaixe.setText(colloaixe.getCellData(index));
-        txtngaykh.setText(colngaykh.getCellData(index));
-        txtgiokh.setText(colgiokh.getCellData(index));
-        txtgiave.setText(colgiave.getCellData(index));
-        txttenkh.setText(coltenkh.getCellData(index));
-        txtsdtkh.setText(colsdtkh.getCellData(index));
-        txttennv.setText(coltennv.getCellData(index));
-        txtsdtnv.setText(colsdtnv.getCellData(index));
-        txtsoghe.setText(colghe.getCellData(index));
+    public void getSelected (MouseEvent event){
+        
+        QLBV i = this.tbvQLBV.getSelectionModel().getSelectedItem();
+
+        txtidrandom.setText(String.valueOf(i.getId()));
+        txttencx.setText(i.getTencx());
+        txtbsx.setText(i.getBsx());
+        txtloaixe.setText(i.getLoaixe());
+        txtngaykh.setText(i.getNgaykh());
+        txtgiokh.setText(i.getGiokh());
+        txtgiave.setText(i.getGiave());
+        txtsoghe.setText(i.getGhe());
+        txttenkh.setText(i.getTenkh());
+        txtsdtkh.setText(i.getSdtkh());
+        txttennv.setText(i.getTennv());
+        txtsdtnv.setText(i.getSdtnv());
         txtidht.setText(colidphanbiet.getCellData(index));
         
     }

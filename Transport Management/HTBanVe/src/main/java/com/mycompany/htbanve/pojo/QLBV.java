@@ -10,25 +10,25 @@ package com.mycompany.htbanve.pojo;
  * @author Tuan Anh
  */
 public class QLBV {
-    private String id,tencx,bsx,giokh,giave,tennv,sdtnv,loaixe,tenkh,sdtkh,ghe,ngaykh,idphanbiet;
-    public QLBV(String id,String tencx, String bsx, String giokh, String giave,
-            String tennv, String sdtnv, String loaixe, String tenkh, String sdtkh, String ngaykh,String ghe,String idphanbiet) {
+    private String id,tencx,bsx,loaixe,ngaykh,giokh,giave,ghe,tenkh,sdtkh,tennv,sdtnv,idphanbiet;
+    public QLBV(String id,String tencx, String bsx,String loaixe, String ngaykh, String giokh, String giave,String ghe,
+            String tenkh, String sdtkh,String tennv, String sdtnv, String idphanbiet) {
         this.id = id;
         this.tencx = tencx;
         this.bsx = bsx;
+        this.loaixe = loaixe;
+        this.ngaykh = ngaykh;
         this.giokh = giokh;
         this.giave = giave;
-        this.tennv = tennv;
-        this.sdtnv = sdtnv;
-        this.loaixe = loaixe;
+        this.ghe = ghe;
         this.tenkh = tenkh;
         this.sdtkh = sdtkh;
-        this.ngaykh = ngaykh;
-        this.ghe = ghe;
+        this.tennv = tennv;
+        this.sdtnv = sdtnv;
         this.idphanbiet = idphanbiet;
     }
 
-    QLBV() {
+    public QLBV() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -71,7 +71,7 @@ public class QLBV {
         this.tenkh = tenkh;
     }
 
-    public void setStdkh(String sdtkh) {
+    public void setSdtkh(String sdtkh) {
         this.sdtkh = sdtkh;
     }
 

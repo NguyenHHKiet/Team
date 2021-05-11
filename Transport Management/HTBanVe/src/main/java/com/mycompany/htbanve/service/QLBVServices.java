@@ -8,6 +8,7 @@ import com.mycompany.htbanve.pojo.QLBV;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLDataException;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -21,17 +22,40 @@ import javax.swing.JOptionPane;
  * @author Tuan Anh
  */
 public class QLBVServices {
-    public static List<QLBV> getDataQLBV() throws SQLException {
-        Connection conn = JdbcUtils.getConnection();
-        Statement stm = conn.createStatement();
-        ResultSet rs = stm.executeQuery("Select * From qlbv");
+    private Connection conn = JdbcUtils.getConnection();
+
+    public QLBVServices(Connection conn) {
+        this.conn = conn;
+    }
+    public List<QLBV> getDataQLBV(String kw) throws SQLException {
+        if (kw == null)
+            throw new SQLDataException();
+        
+        String sql = "Select * from qlbv WHERE name like concat('%', ?, '%') ORDER BY id DESC";
+        
+        PreparedStatement stm = this.conn.prepareStatement(sql);
+        stm.setString(1, kw);
+       
+        ResultSet rs = stm.executeQuery();
+        
+        
         List<QLBV> results = new ArrayList<>();
-        while(rs.next()) {
-            QLBV c = new QLBV(rs.getString("QLBVid"),rs.getString("QLBVtencx"), rs.getString("QLBVbsx"), rs.getString("QLBVgiokh")
-                    , rs.getString("QLBVgiave"), rs.getString("QLBVtennv"), rs.getString("QLBVsdtnv")
-                    , rs.getString("QLBVloaixe"), rs.getString("QLBVtenkh"), rs.getString("QLBVsdtkh")
-                    , rs.getString("QLBVngaykh"),rs.getString("QLBVghe"),rs.getString("idphanbiet"));  
-            results.add(c);
+        while(rs.next()){
+            QLBV v = new QLBV();
+            v.setId(rs.getString("QLBVid"));
+            v.setTencx(rs.getString("QLBVtencx"));
+            v.setBsx(rs.getString("QLBVbsx"));
+            v.setLoaixe(rs.getString("QLBVloaixe"));
+            v.setNgaykh(rs.getString("QLBVngaykh"));
+            v.setGiokh(rs.getString("QLBVgiokh"));
+            v.setGiave(rs.getString("QLBVgiave"));
+            v.setGhe(rs.getString("QLBVghe"));
+            v.setTenkh(rs.getString("QLBVtenkh"));
+            v.setSdtkh(rs.getString("QLBVsdtkh"));
+            v.setTennv(rs.getString("QLBVtennv"));
+            v.setSdtnv(rs.getString("QLBVsdtnv"));
+              
+            results.add(v);
         }
         return results;
     }
