@@ -54,13 +54,13 @@ public class QLCXsServicesTest {
 
     @Test
     public void testGetDataQLCXs() throws Exception {
-        try {
-            List<QLCX> result = QLCXsServices.getDataQLCXs();
-            Assert.assertEquals(4, result.size());
+//        try {
+            ObservableList<QLCX> result = QLCXsServices.getDataQLCX();
+            Assert.assertEquals(13, result.size());
             System.err.println("Test Successfully");
-        } catch (SQLException ex) {
-            System.err.println("Test Unsuccessfully");
-        }
+//        } catch (SQLException ex) {
+//            System.err.println("Test Unsuccessfully");
+//        }
     }
 
     /**
@@ -70,7 +70,7 @@ public class QLCXsServicesTest {
     public void testGetDataQLCX() {
         try {
             ObservableList<QLCX> result = QLCXsServices.getDataQLCX();
-            Assert.assertEquals(4, result.size());
+            Assert.assertEquals(13, result.size());
             System.err.println("Test Successfully");
         } catch (Exception ex) {
             System.err.println("Test Unsuccessfully");
@@ -95,7 +95,7 @@ public class QLCXsServicesTest {
             String i = "j";
             String k = "k";
             QLCXsServices.addCX(a, b, c, d, e, f, g, h, i, k);
-        List<QLCX> list = QLCXsServices.getDataQLCXs();
+        ObservableList<QLCX> list = QLCXsServices.getDataQLCX();
         for (QLCX a1 : list){
             {
                 
@@ -112,7 +112,7 @@ public class QLCXsServicesTest {
                 
             }
         }
-            Assert.assertEquals(6, l);
+            Assert.assertEquals("6", l);
             Assert.assertEquals("b", m);
             Assert.assertEquals("c", n);
             Assert.assertEquals("d", o);
@@ -133,6 +133,7 @@ public class QLCXsServicesTest {
     @Test
     public void testEditCX() throws Exception {
         String  b = null,c= null,d=null,e = null ,f= null,g= null,h=null,j=null,k=null;
+        int a = 0;
         try{
             String value1 = "5";
             String value2 = "hw";
@@ -145,29 +146,33 @@ public class QLCXsServicesTest {
             String value9 = "ho";
             String value10 = "hp";
             QLCXsServices.EditCX(value1, value2, value3, value4, value5, value6, value7, value8, value9, value10);
-            List<QLCX> list = QLCXsServices.getDataQLCXs();
+            ObservableList<QLCX> list = QLCXsServices.getDataQLCX();
             for (QLCX a1 : list){
                 {
+                    a = a1.getId();
                     b = a1.getTencx();
                     c = a1.getBsx();
                     d = a1.getLoaixe();
                     e = a1.getNgaykh();
                     f = a1.getGiokh();
                     g = a1.getGiave();
+                    k = a1.getGhe(); 
                     h = a1.getTennv();
                     j = a1.getSdtnv();
-                    k = a1.getGhe(); 
+                    
                 }
         }
+            Assert.assertEquals("14", a);
             Assert.assertEquals("hw", b);
             Assert.assertEquals("he", c);
             Assert.assertEquals("hr", d);
             Assert.assertEquals("ht", e);
             Assert.assertEquals("hy", f);
             Assert.assertEquals("hu", g);
+            Assert.assertEquals("hp", k);
             Assert.assertEquals("hi", h);
             Assert.assertEquals("ho", j);
-            Assert.assertEquals("hp", k);
+            
         }catch(Exception ex){
             JOptionPane.showMessageDialog(null, ex);
         }
@@ -180,14 +185,15 @@ public class QLCXsServicesTest {
     public void testDeleteCX() throws Exception {
         int b = 0;
         try{
-            String a = "2";
-            QLCXsServices.DeleteCX(a);
-        List<QLCX> list = QLCXsServices.getDataQLCXs();
+            int a = 2;
+            QLCXsServices.deleteQLCX(a);
+        ObservableList<QLCX> list = QLCXsServices.getDataQLCX();
         for (QLCX a1 : list){
             {
                 b = a1.getId();
             }
         }
+            Assert.assertEquals("14", b);
             Assert.assertEquals(5, b);
         }catch(Exception ex){
             JOptionPane.showMessageDialog(null, ex);

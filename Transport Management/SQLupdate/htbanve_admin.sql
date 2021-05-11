@@ -1,7 +1,6 @@
-SELECT * FROM htbanve.admin;
 -- MySQL dump 10.13  Distrib 8.0.22, for Win64 (x86_64)
 --
--- Host: 127.0.0.1    Database: htbanve
+-- Host: localhost    Database: htbanve
 -- ------------------------------------------------------
 -- Server version	8.0.22
 
@@ -37,7 +36,7 @@ CREATE TABLE `admin` (
 
 LOCK TABLES `admin` WRITE;
 /*!40000 ALTER TABLE `admin` DISABLE KEYS */;
-INSERT INTO `admin` VALUES ('','',''),('Duc','123456','Duc@gmail.com'),('Duyen','123456','Duyen@gmail.com'),('Lam','123456','Lam@gmail.com'),('Ngan','123456','Ngan@gmail.com'),('tung','123456','tung@gmail.com'),('Tung123','123456','Tung@gmail.com'),('Tung2000','12345','Tung2000@gmail.com'),('Tung2000    ','123456','Tung2000@gmail.com'),('Tung20001','12345','Tung2000@gmail.com');
+INSERT INTO `admin` VALUES ('','',''),('admin','admin','admin@ou.edu.vn'),('duong','123456','duong@ou.edu.vn'),('kiet','123456','kiet@ou.edu.vn'),('mai','123456','mai@ou.edu.vn'),('test000','123456','test000@ou.edu.vn'),('tuan','123456','tuan@ou.edu.vn');
 /*!40000 ALTER TABLE `admin` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -50,4 +49,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-12-14  4:07:23
+-- Dump completed on 2021-05-10 23:03:17

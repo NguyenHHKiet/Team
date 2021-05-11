@@ -41,8 +41,6 @@ public class TrangChuController implements Initializable{
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-//        String a = LocalDate.now().toString();
-//        tesst.setText(a);
     }
 
     private Parent loadFXML(String trangChu) {

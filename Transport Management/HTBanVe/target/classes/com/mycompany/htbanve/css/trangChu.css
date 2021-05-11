@@ -12,7 +12,7 @@ and open the template in the editor.
     -fx-background-color:#FFA000;
 }
 .button:hover{
-    -fx-background-color: #2F2A2B;
+    -fx-background-color: #FFF9A5;
 }
 .button:pressed{
     -fx-background-color:orange;

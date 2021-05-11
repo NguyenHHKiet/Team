@@ -14,22 +14,22 @@
 <AnchorPane id="AnchorPane" style="-fx-background-color: #c8dcf4;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.htbanve.QuanLyVeXeController">
     <children>
     
-        <AnchorPane id="AnchorPane" layoutX="7.0" layoutY="4.0" prefHeight="586.0" prefWidth="1503.0">
+        <AnchorPane id="AnchorPane" layoutX="14.0" layoutY="2.0" prefHeight="606.0" prefWidth="1503.0" stylesheets="@css/quanLyVeXe.css">
             <children>
-                <GridPane layoutX="56.0" layoutY="111.0" prefHeight="446.0" prefWidth="471.0">
+                <GridPane layoutX="41.0" layoutY="115.0" prefHeight="444.0" prefWidth="437.0">
                     <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="359.0" minWidth="10.0" prefWidth="132.4000244140625" />
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="617.0" minWidth="10.0" prefWidth="337.9999755859375" />
                     </columnConstraints>
                     <rowConstraints>
-                        <RowConstraints maxHeight="52.999986267089845" minHeight="0.0" prefHeight="29.399993896484375" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="52.999986267089845" minHeight="10.0" prefHeight="30.200006103515626" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="101.59999389648438" minHeight="10.0" prefHeight="39.799990844726565" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="83.60001220703124" minHeight="10.0" prefHeight="29.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="52.999986267089845" minHeight="0.0" prefHeight="30.0000244140625" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="52.999986267089845" minHeight="10.0" prefHeight="30.799993896484374" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="101.59999389648438" minHeight="10.0" prefHeight="29.200006103515634" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="83.60001220703124" minHeight="10.0" prefHeight="28.399987792968744" vgrow="SOMETIMES" />
                         <RowConstraints maxHeight="79.4" minHeight="10.0" prefHeight="34.39999389648436" vgrow="SOMETIMES" />
                         <RowConstraints maxHeight="87.4" minHeight="10.0" prefHeight="40.800012207031244" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="88.0000061035156" minHeight="10.0" prefHeight="38.19999999999999" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="77.39999999999998" minHeight="10.0" prefHeight="39.99999389648437" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="88.0000061035156" minHeight="10.0" prefHeight="36.600012207031256" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="77.39999999999998" minHeight="10.0" prefHeight="39.79998779296875" vgrow="SOMETIMES" />
                         <RowConstraints maxHeight="71.0000061035156" minHeight="10.0" prefHeight="36.800006103515614" vgrow="SOMETIMES" />
                         <RowConstraints maxHeight="67.79999389648435" minHeight="10.0" prefHeight="34.399993896484375" vgrow="SOMETIMES" />
                         <RowConstraints maxHeight="66.0000061035156" minHeight="10.0" prefHeight="40.000036621093784" vgrow="SOMETIMES" />
@@ -60,21 +60,23 @@
                         <TextField fx:id="txttennv" disable="true" GridPane.columnIndex="1" GridPane.rowIndex="11" />
                         <TextField fx:id="txtsdtnv" disable="true" GridPane.columnIndex="1" GridPane.rowIndex="12" />
                         <Label text="Ghế:" GridPane.rowIndex="7" />
-                        <TextField fx:id="txtsoghe" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                        <TextField fx:id="txtghe" disable="true" GridPane.columnIndex="1" GridPane.rowIndex="7" />
                         <TextField fx:id="txtidrandom" disable="true" GridPane.columnIndex="1" />
                         <Label text="ID:" />
                     </children>
                 </GridPane>
-           
-                            <Button layoutX="604.0" layoutY="466.0" mnemonicParsing="false" onAction="#Edit" text="Cập nhật" />
-            <TableView fx:id="tbvQLBV" layoutX="559.0" layoutY="73.0" onMouseClicked="#getSelected" prefHeight="371.0" prefWidth="929.0" stylesheets="@css/addChuyenXe.css" />
-                <Button layoutX="739.0" layoutY="466.0" mnemonicParsing="false" onAction="#QuayLaiTC" text="Quay lại" />
-            <TextField fx:id="filterField" layoutX="561.0" layoutY="29.0" />
+            <TableView fx:id="tbvQLBV" layoutX="504.0" layoutY="111.0" onMouseClicked="#getSelected" prefHeight="395.0" prefWidth="992.0" stylesheets="@css/addChuyenXe.css" />
+                <Button layoutX="1066.0" layoutY="535.0" mnemonicParsing="false" onAction="#QuayLaiTC" prefHeight="50.0" prefWidth="150.0" text="Quay lại" />
+            <TextField fx:id="filterField" layoutX="655.0" layoutY="64.0" prefHeight="26.0" prefWidth="270.0" promptText="Nhập tên chuyến xe hoặc tên khách hàng" />
             <Label layoutX="127.0" layoutY="21.0" prefHeight="66.0" prefWidth="329.0" text="QUẢN LÝ VÉ XE" textFill="#f08610">
                <font>
                   <Font size="39.0" />
                </font>
             </Label>
+            <Button layoutX="655.0" layoutY="535.0" mnemonicParsing="false" onAction="#Edit" prefHeight="50.0" prefWidth="150.0" text="Cập nhật" />
+            <Button layoutX="864.0" layoutY="535.0" mnemonicParsing="false" onAction="#DeleteQLBV" prefHeight="50.0" prefWidth="150.0" text="Xóa" />
+            <Label layoutX="553.0" layoutY="69.0" stylesheets="@css/addChuyenXe.css" text="Tìm vé xe:" />
+            <Button layoutX="1275.0" layoutY="535.0" mnemonicParsing="false" onAction="#Print" prefHeight="50.0" prefWidth="150.0" text="In vé" />
             </children>
         </AnchorPane>
     </children>

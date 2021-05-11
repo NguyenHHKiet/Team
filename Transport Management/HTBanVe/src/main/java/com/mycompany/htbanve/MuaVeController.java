@@ -51,6 +51,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableCell;
+import java.time.format.DateTimeFormatter;
 /**
  *
  * @author Tuan Anh
@@ -77,7 +78,7 @@ public class MuaVeController implements Initializable{
     @FXML
     private TextField txtid;
     @FXML
-    private DatePicker txtngaykh; 
+    private TextField txtngaykh; 
     @FXML
     private TextField txtghe;
     private TextField txtMaGhe;
@@ -94,7 +95,7 @@ public class MuaVeController implements Initializable{
     @FXML
     private TableColumn<QLCX, String> colgiokh;
     @FXML
-    private TableColumn<QLCX, DatePicker> colngaykh;
+    private TableColumn<QLCX, String> colngaykh;
     @FXML
     private TableColumn<QLCX, String> colgiave;
     @FXML
@@ -131,7 +132,7 @@ public class MuaVeController implements Initializable{
                 loadQLBVData(this.filterField.getText());
             });
             
-//            UpdateQLBV();
+            UpdateQLBV();
             FindCX();
             
         } catch (SQLException ex) {
@@ -148,46 +149,38 @@ public class MuaVeController implements Initializable{
 
     
     // Load dl len table view
-//    public void UpdateQLBV() throws SQLException{    
-//        conn = JdbcUtils.getConnection();
-//        ObservableList<QLBV> data = FXCollections.observableArrayList();
-//       
-//
-//    }
+    public void UpdateQLBV() throws SQLException{    
+        conn = JdbcUtils.getConnection();
+        ObservableList<QLBV> data = FXCollections.observableArrayList();
+       
 
-
-    // Lay du lieu tu table view vao textfield
+    }   // Lay du lieu tu table view vao textfield
     @FXML
     public void getSelected (MouseEvent event){
-        try {
+   
                     QLCX i = this.tbvMuaVe.getSelectionModel().getSelectedItem();
                      
                     txtid.setText(String.valueOf(i.getId()));
                     txttencx.setText(i.getTencx());
                     txtbsx.setText(i.getBsx());
                     txtloaixe.setText(i.getLoaixe());
+                    txtngaykh.setText(i.getNgaykh());
                     txtgiokh.setText(i.getGiokh());
                     txtgiave.setText(i.getGiave());
                     txtghe.setText(i.getGhe());
                     txttennv.setText(i.getTennv());
                     txtsdtnv.setText(i.getSdtnv());
                     
-//                    txtngaykh
-                    
-                    
-                    
-                } catch (SQLException ex) {
-                    Logger.getLogger(AddChuyenXeController.class.getName()).log(Level.SEVERE, null, ex);
-                }
-        
+//                    String sDate1 = i.getNgaykh();  
+//                    txtngaykh.toString() = SimpleDateFormat(i.getNgaykh()).parse(sDate1); 
     }
     // them ve vao csdl
-    public void AddQLBV(){
+    public void AddQLBV() throws SQLException{
          conn = JdbcUtils.getConnection();
         //date
         // dieu kien k cho phep de trong o dl
         if ( "".equals(txttencx.getText()) || "".equals(txtbsx.getText()) 
-                || "".equals(txtgiokh.getText()) || (txtngaykh.getValue()) == null || "".equals(txtgiave.getText()) 
+                || "".equals(txtgiokh.getText()) || "".equals(txtngaykh.getText())  || "".equals(txtgiave.getText()) 
                 || "".equals(txttenkh.getText()) || "".equals(txtsdtkh.getText()) || "".equals(txtloaixe.getText()) 
                 || "".equals(txttennv.getText()) || "".equals(txtsdtnv.getText()) || "".equals(txtghe.getText()))
         {            
@@ -198,9 +191,10 @@ public class MuaVeController implements Initializable{
                   
         }else
         {                 
-            try {
+            
                 String rm = UUID.randomUUID().toString(); 
-//                DateFormat df = new SimpleDateFormat("dd MMM yyyy");
+                
+//                DateFormat df = new SimpleDateFormat("dd MM yyyy");
 //                LocalDate localDate = txtngaykh.getValue();
 //                Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
 //                Date date = (Date) Date.from(instant);
@@ -212,22 +206,22 @@ public class MuaVeController implements Initializable{
                     String value1 = String.valueOf(a);
                     String value2 = txtid.getText();
                     QLBVServices.GiamGhe(value1, value2);
-                    QLBVServices.addVe(rm,txttencx.getText() , txtbsx.getText(),txtgiokh.getText(), txtngaykh.getValue().toString()
+                    QLBVServices.addVe(rm,txttencx.getText() , txtbsx.getText(), txtloaixe.getText(), txtngaykh.getText(),txtgiokh.getText()
                          , txtgiave.getText(),txtghe.getText()
-                         , txtloaixe.getText(), txttennv.getText(), txtsdtnv.getText(), txttenkh.getText(), txtsdtkh.getText()
+                         , txttennv.getText(), txtsdtnv.getText(), txttenkh.getText(), txtsdtkh.getText()
                          ); 
+                    
+                    
                 } catch (SQLException e) {
                     JOptionPane.showMessageDialog(null, e);
                 }
-                JOptionPane.showMessageDialog(null, "Quý khách đã đặt vé thành công \n"
-                        + " Lưu ý : Hãy đến quầy nhân viên để nhận vé trong 30p trước giờ khởi hành !!! \n"
-                        + "!!!!Quá 30p trước giờ khởi hành vé sẽ bị hủy!!!!\n"
-                        + "Chân thành cảm ơn quý khách!!!");
-//                UpdateQLBV();
-                //FindCX();
-            } catch (SQLException e) {
-                JOptionPane.showMessageDialog(null,e);
-            }
+                JOptionPane.showMessageDialog(null, "Quý khách đã đặt vé thành công. \n"
+                        + " Lưu ý : Hãy đến quầy nhân viên để nhận vé trong 30p trước giờ khởi hành.\n"
+                        + "Quá 30p trước giờ khởi hành vé sẽ bị hủy.\n"
+                        + "Chân thành cảm ơn quý khách.");
+                UpdateQLBV();
+                FindCX();
+            loadQLBVData("");
         }        
     }
     
@@ -244,24 +238,25 @@ public class MuaVeController implements Initializable{
                                     String lowerCaSeFilter = newValue.toLowerCase();
 
                                     if (person.getTencx().toLowerCase().indexOf(lowerCaSeFilter) != -1) {
-                                        return true;
-                                    } else if (person.getBsx().toLowerCase().indexOf(lowerCaSeFilter) != -1) {
-                                        return true;
-                                    }else if (person.getLoaixe().toLowerCase().indexOf(lowerCaSeFilter) != -1) {
-                                            return true;
-                                    }else if (person.getGiokh().toLowerCase().indexOf(lowerCaSeFilter) != -1) {
-                                            return true;
-                                    }else if (person.getNgaykh().toLowerCase().indexOf(lowerCaSeFilter) != -1) {
-                                            return true;
-                                    }else if (person.getGiave().toLowerCase().indexOf(lowerCaSeFilter) != -1) {
-                                            return true;        
-                                    }else if (person.getTennv().toLowerCase().indexOf(lowerCaSeFilter) != -1) {
-                                            return true; 
-                                    }else 
-                                       if ( person.getSdtnv().toLowerCase().indexOf(lowerCaSeFilter) != -1)
-                                           return true;
+                                        return true; 
+                                    }
+//                                    } else if (person.getBsx().toLowerCase().indexOf(lowerCaSeFilter) != -1) {
+//                                        return true;
+//                                    }else if (person.getLoaixe().toLowerCase().indexOf(lowerCaSeFilter) != -1) {
+//                                            return true;
+//                                    }else if (person.getGiokh().toLowerCase().indexOf(lowerCaSeFilter) != -1) {
+//                                            return true;
+//                                    }else if (person.getNgaykh().toLowerCase().indexOf(lowerCaSeFilter) != -1) {
+//                                            return true;
+//                                    }else if (person.getGiave().toLowerCase().indexOf(lowerCaSeFilter) != -1) {
+//                                            return true;        
+//                                    }else if (person.getTennv().toLowerCase().indexOf(lowerCaSeFilter) != -1) {
+//                                            return true; 
+//                                    }else 
+//                                       if ( person.getSdtnv().toLowerCase().indexOf(lowerCaSeFilter) != -1)
+//                                           return true;
 
-                                           else
+                                         else
                                                 return false;
             });                                                                             
         });
@@ -281,28 +276,37 @@ public class MuaVeController implements Initializable{
         
         TableColumn colid = new TableColumn("ID");
         colid.setCellValueFactory(new PropertyValueFactory<>("id"));
+        
         TableColumn colNameCX = new TableColumn("Tên chuyến xe");
         colNameCX.setCellValueFactory(new PropertyValueFactory<>("tencx"));
+        
         TableColumn colbsx = new TableColumn("Biển số xe");
         colbsx.setCellValueFactory(new PropertyValueFactory<>("bsx"));
+        
         TableColumn colloaixe = new TableColumn("Loại xe");
         colloaixe.setCellValueFactory(new PropertyValueFactory<>("loaixe"));
-        TableColumn colgiokh = new TableColumn("Gời khởi hành");
-        colgiokh.setCellValueFactory(new PropertyValueFactory<>("giokh"));
+        
         TableColumn colngaykh = new TableColumn("Ngày khởi hành");
         colngaykh.setCellValueFactory(new PropertyValueFactory<>("ngaykh"));
+        
+        TableColumn colgiokh = new TableColumn("Giờ khởi hành");
+        colgiokh.setCellValueFactory(new PropertyValueFactory<>("giokh"));
+         
         TableColumn colgiave = new TableColumn("Giá vé");
         colgiave.setCellValueFactory(new PropertyValueFactory<>("giave"));
+        
         TableColumn colghe = new TableColumn("Số ghế");
         colghe.setCellValueFactory(new PropertyValueFactory<>("ghe"));
+        
         TableColumn coltennv = new TableColumn("Tên nhân viên");
         coltennv.setCellValueFactory(new PropertyValueFactory<>("tennv"));
+        
         TableColumn colsdtnv = new TableColumn("SDT nv");
         colsdtnv.setCellValueFactory(new PropertyValueFactory<>("sdtnv"));
         
         
 
-        this.tbvMuaVe.getColumns().addAll(colNameCX, colbsx, colloaixe, colgiokh, colngaykh, colgiave, colghe, coltennv, colsdtnv);
+        this.tbvMuaVe.getColumns().addAll(colNameCX, colbsx, colloaixe, colngaykh, colgiokh, colgiave, colghe, coltennv, colsdtnv);
 
     }
     public void loadQLBVData(String kw) {

@@ -9,15 +9,12 @@ import com.mycompany.htbanve.pojo.QLBV;
 import com.mycompany.htbanve.pojo.QLCX;
 import com.mycompany.htbanve.service.JdbcUtils;
 import com.mycompany.htbanve.service.QLBVServices;
-import com.mycompany.htbanve.service.Utils;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -44,7 +41,7 @@ import javax.swing.JOptionPane;
  * @author Tuan Anh
  */
 public class QuanLyVeXeController implements Initializable {
-
+    
     @FXML
     private TextField txttencx;
 
@@ -73,14 +70,9 @@ public class QuanLyVeXeController implements Initializable {
     @FXML
     private TextField txtsdtkh;
     @FXML
-    private TextField txtsoghe;
+    private TextField txtghe;
     @FXML
     private TextField txtidrandom;
-//    @FXML
-//    private TextField txtngayht;
-//    @FXML
-//    private TextField txtgioht;
-    
     @FXML
     private TableView<QLBV> tbvQLBV;
     @FXML
@@ -121,10 +113,6 @@ public class QuanLyVeXeController implements Initializable {
     PreparedStatement pst = null;
     ResultSet rs1 = null;
     
-//    @FXML
-//    private TableView<?> tbvQLCX;
-//    @FXML
-//    private TableColumn<?, ?> colid;
     /**
      * Initializes the controller class.
      * @param url
@@ -139,12 +127,8 @@ public class QuanLyVeXeController implements Initializable {
         loadQLBVData("");
 
         try {
-            
-           
             UpdateQLBV();
             FindCX();
-//            txtngayht.setText(LocalDate.now().toString());
-//            txtgioht.setText(LocalTime.now().toString().substring(0, 5));
             
         } catch (SQLException ex) {
             Logger.getLogger(MuaVeController.class.getName()).log(Level.SEVERE, null, ex);
@@ -168,38 +152,37 @@ public class QuanLyVeXeController implements Initializable {
 
         TableColumn colloaixe = new TableColumn("Loại Xe");
         colloaixe.setCellValueFactory(new PropertyValueFactory("loaixe"));
+        
+        TableColumn colngaykh = new TableColumn("Ngày Khởi Hành");
+        colngaykh.setCellValueFactory(new PropertyValueFactory("ngaykh"));
 
         TableColumn colgiokh = new TableColumn("Giờ Khởi Hành");
         colgiokh.setCellValueFactory(new PropertyValueFactory("giokh"));
 
-        TableColumn colngaykh = new TableColumn("Ngày Khởi Hành");
-        colngaykh.setCellValueFactory(new PropertyValueFactory("ngaykh"));
-
         TableColumn colgiave = new TableColumn("Giá Vé");
         colgiave.setCellValueFactory(new PropertyValueFactory("giave"));
         
-        TableColumn coltenkh = new TableColumn("Tên Khách Hàng");
-        coltenkh.setCellValueFactory(new PropertyValueFactory("tenkh"));
-        
-        TableColumn colsdtkh = new TableColumn("SĐT Khách Hàng");
-        colsdtkh.setCellValueFactory(new PropertyValueFactory("sdtkh"));
+        TableColumn colghe = new TableColumn("Ghế");
+        colghe.setCellValueFactory(new PropertyValueFactory("ghe"));
 
         TableColumn coltennv = new TableColumn("Tên Nhân Viên");
         coltennv.setCellValueFactory(new PropertyValueFactory("tennv"));
 
         TableColumn colsdtnv = new TableColumn("SĐT Nhân Viên");
         colsdtnv.setCellValueFactory(new PropertyValueFactory("sdtnv"));
-
-        TableColumn colghe = new TableColumn("Ghế");
-        colghe.setCellValueFactory(new PropertyValueFactory("ghe"));
-        this.tbvQLBV.getColumns().addAll(colid, colNameCX, colbsx, colloaixe, colngaykh, colgiokh, colgiave, colghe, coltenkh, colsdtkh, coltennv, colsdtnv);
+        
+        TableColumn coltenkh = new TableColumn("Tên Khách Hàng");
+        coltenkh.setCellValueFactory(new PropertyValueFactory("tenkh"));
+        
+        TableColumn colsdtkh = new TableColumn("SĐT Khách Hàng");
+        colsdtkh.setCellValueFactory(new PropertyValueFactory("sdtkh"));
+        this.tbvQLBV.getColumns().addAll(colid, colNameCX, colbsx, colloaixe, colngaykh, colgiokh, colgiave, colghe, coltennv, colsdtnv, coltenkh, colsdtkh);
 
     }
 
     public void loadQLBVData(String kw) {
         try {
             this.tbvQLBV.getItems().clear();
-
             Connection conn = JdbcUtils.getConnection();
             QLBVServices qls = new QLBVServices(conn);
             this.tbvQLBV.setItems(FXCollections.observableList(qls.getDataQLBV(kw)));
@@ -215,7 +198,6 @@ public class QuanLyVeXeController implements Initializable {
     public void UpdateQLBV() throws SQLException{
         conn = JdbcUtils.getConnection();
         ObservableList<QLBV> data = FXCollections.observableArrayList();
-//        tbvQLBV.setItems(data);
     }
     // Lay du lieu tu table view vao textfield
     @FXML
@@ -230,25 +212,27 @@ public class QuanLyVeXeController implements Initializable {
         txtngaykh.setText(i.getNgaykh());
         txtgiokh.setText(i.getGiokh());
         txtgiave.setText(i.getGiave());
-        txtsoghe.setText(i.getGhe());
-        txttenkh.setText(i.getTenkh());
-        txtsdtkh.setText(i.getSdtkh());
+        txtghe.setText(i.getGhe());
         txttennv.setText(i.getTennv());
         txtsdtnv.setText(i.getSdtnv());
-        txtidht.setText(colidphanbiet.getCellData(index));
+        txttenkh.setText(i.getTenkh());
+        txtsdtkh.setText(i.getSdtkh());
         
     }
+    
+  
+    
     @FXML
     public void Edit(){
         if ( "".equals(txttenkh.getText()) || "".equals(txtsdtkh.getText()) 
-                || "".equals(txtsoghe.getText()) )
+                || "".equals(txtghe.getText()) )
         {           
-            JOptionPane.showMessageDialog(null, "Chua nhap du thong tin","about",JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Chưa nhập đủ thông tin.","about",JOptionPane.INFORMATION_MESSAGE);
         }
         else{     
         try {
-            QLBVServices.updateQLBV(txttenkh.getText(), txtsdtkh.getText(), txtsoghe.getText(), txtidrandom.getText());
-            JOptionPane.showMessageDialog(null, "update");
+            QLBVServices.updateQLBV(txttenkh.getText(), txtsdtkh.getText(), txtghe.getText(), txtidrandom.getText());
+            JOptionPane.showMessageDialog(null, "Sửa thông tin vé xe thành công.");
             UpdateQLBV();
             FindCX();
         } catch (SQLException e) {
@@ -258,9 +242,10 @@ public class QuanLyVeXeController implements Initializable {
     }
     public void DeleteQLBV(){
         try { 
-            QLBVServices.XoaVe(txtidrandom.getText(), txtidht.getText());
+            QLBVServices.XoaVe(txtidrandom.getText());
             UpdateQLBV();
             FindCX();
+            JOptionPane.showMessageDialog(null, "Xóa vé thành công.");
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e);
         }
@@ -278,30 +263,10 @@ public class QuanLyVeXeController implements Initializable {
 
                                     if (person.getTencx().toLowerCase().indexOf(lowerCaSeFilter) != -1) {
                                         return true;
-                                    } else if (person.getBsx().toLowerCase().indexOf(lowerCaSeFilter) != -1) {
-                                        return true;
-                                    }else if (person.getLoaixe().toLowerCase().indexOf(lowerCaSeFilter) != -1) {
-                                            return true;
-                                    }else if (person.getGiokh().toLowerCase().indexOf(lowerCaSeFilter) != -1) {
-                                            return true;
-                                    }else if (person.getNgaykh().toLowerCase().indexOf(lowerCaSeFilter) != -1) {
-                                            return true;
-                                    }else if (person.getGiave().toLowerCase().indexOf(lowerCaSeFilter) != -1) {
-                                            return true;
                                     }else if (person.getTenkh().toLowerCase().indexOf(lowerCaSeFilter) != -1) {
-                                            return true; 
-                                    }else if (person.getSdtkh().toLowerCase().indexOf(lowerCaSeFilter) != -1) {
-                                            return true; 
-                                    }else if (person.getTennv().toLowerCase().indexOf(lowerCaSeFilter) != -1) {
-                                            return true;
-                                    }else if (person.getGhe().toLowerCase().indexOf(lowerCaSeFilter) != -1) {
-                                            return true;
-                                    }else 
-                                       if ( person.getSdtnv().toLowerCase().indexOf(lowerCaSeFilter) != -1)
-                                           return true;
-
-                                           else
-                                                return false;
+                                        return true; 
+                                    }else
+                                        return false;
             });                                                                             
         });
         SortedList<QLBV> sortedData = new SortedList<>(filteredData);
@@ -309,12 +274,15 @@ public class QuanLyVeXeController implements Initializable {
         tbvQLBV.setItems(sortedData);
 
     }
+    
+   @FXML
    public void Print(ActionEvent e) throws IOException{
-//       PrintTicket pt = new PrintTicket(txtidrandom.getText(), txttencx.getText(), txtbsx.getText(), 
-//               txtngaykh.getText(), txtgiokh.getText(), txtsoghe.getText(), txtgiave.getText(), 
-//               txttenkh.getText(), txtsdtkh.getText(), txttennv.getText(), txtngayht.getText());
-//      App.setRoot("PrintTicket");
-//    UpdateQLBV();
+    PrintTicket pt = new PrintTicket(txtidrandom.getText(), txttencx.getText(), txtbsx.getText(), 
+            txtngaykh.getText(), txtgiokh.getText(), txtgiave.getText(), txtghe.getText(), 
+            txttenkh.getText(), txtsdtkh.getText(), txttennv.getText());
+   
+    
+    
     Stage stage = (Stage)((Node) e.getSource()).getScene().getWindow();
     FXMLLoader loader = new FXMLLoader();
     loader.setLocation(getClass().getResource("PrintTicket.fxml"));
@@ -324,6 +292,6 @@ public class QuanLyVeXeController implements Initializable {
     QLBV qlbv = tbvQLBV.getSelectionModel().getSelectedItem();
     controller.setPrint(qlbv);
     stage.setScene(scene);
-    
+
    }
 }

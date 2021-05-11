@@ -50,12 +50,13 @@ public class QLCXsServices {
             c.setTencx(rs.getString("QLCXtencx"));
             c.setBsx(rs.getString("QLCXbsx"));
             c.setLoaixe(rs.getString("QLCXloaixe"));
-            c.setGiokh(rs.getString("QLCXgiokh"));
             c.setNgaykh(rs.getString("QLCXngaykh"));
+            c.setGiokh(rs.getString("QLCXgiokh"));
             c.setGiave(rs.getString("QLCXgiave"));
+            c.setGhe(rs.getString("QLCXghe"));
             c.setTennv(rs.getString("QLCXtennv"));
             c.setSdtnv(rs.getString("QLCXsdtnv"));
-            c.setGhe(rs.getString("QLCXghe"));
+            
               
             results.add(c);
         }
@@ -69,9 +70,9 @@ public class QLCXsServices {
             ResultSet rs = ps.executeQuery();
             while (rs.next()){
                  list.add(new QLCX(Integer.parseInt(rs.getString("idQLCX")),rs.getString("QLCXtencx")
-                         ,rs.getString("QLCXbsx"),rs.getString("QLCXloaixe"),rs.getString("QLCXgiokh")
-                         ,rs.getString("QLCXngaykh"),rs.getString("QLCXgiave"),rs.getString("QLCXtennv")
-                         ,rs.getString("QLCXsdtnv"),rs.getString("QLCXghe"),rs.getString("idphanbiet")));  
+                         ,rs.getString("QLCXbsx"),rs.getString("QLCXloaixe"),rs.getString("QLCXngaykh"),rs.getString("QLCXgiokh")
+                         ,rs.getString("QLCXgiave"),rs.getString("QLCXghe"),rs.getString("QLCXtennv")
+                         ,rs.getString("QLCXsdtnv"),rs.getString("idphanbiet")));  
 
             }
         } catch (SQLException e) {
@@ -80,8 +81,8 @@ public class QLCXsServices {
     }
     public static void addCX(String a, String b, String c, String d, String e, String f, String g, String h, String i, String k) throws SQLException{
         Connection conn = JdbcUtils.getConnection();
-        String sql = "INSERT INTO qlcx (idQLCX,QLCXtencx,QLCXbsx,QLCXgiokh,QLCXngaykh,QLCXgiave"
-                    + ",QLCXtennv,QLCXsdtnv,QLCXloaixe,QLCXghe,idphanbiet)values(?,?,?,?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO qlcx (idQLCX,QLCXtencx,QLCXbsx,QLCXloaixe,QLCXngaykh,QLCXgiokh,QLCXgiave"
+                    + ",QLCXghe,QLCXtennv,QLCXsdtnv,idphanbiet)values(?,?,?,?,?,?,?,?,?,?,?)";
         String rd = UUID.randomUUID().toString();
         PreparedStatement pst = conn.prepareStatement(sql);
         pst .setInt(1, Integer.parseInt(a));
@@ -102,11 +103,11 @@ public class QLCXsServices {
         Connection conn = JdbcUtils.getConnection();
         String sql = "UPDATE qlcx set idQLCX= '"+value1+ "', QLCXtencx= '"+value2+"',QLCXbsx= '"+value3+"',QLCXloaixe= '"+
                 value4+"',QLCXngaykh= '"+value5+"',QLCXgiokh= '"+value6+"',QLCXgiave= '"+
-                value7+"',QLCXtennv= '"+value8+"',QLCXsdtnv= '"+value9+"',QLCXghe='"+value10+"' where idQLCX = '"+value1+"'";
+                value7 +"',QLCXghe='"+value8 +"',QLCXtennv= '"+value9+"',QLCXsdtnv= '"+value10+"' where idQLCX = '"+value1+"'";
         PreparedStatement pst = conn.prepareStatement(sql);
         pst.execute();
     }
-    public boolean deleteQLCX(int id) throws SQLException{
+    public static boolean deleteQLCX(int id) throws SQLException{
         try {
             Connection conn = JdbcUtils.getConnection();
             String sql = "DELETE FROM qlcx where idQLCX = ?";

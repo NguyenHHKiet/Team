@@ -8,17 +8,12 @@ package com.mycompany.htbanve;
 import com.mycompany.htbanve.pojo.QLCX;
 import com.mycompany.htbanve.service.JdbcUtils;
 import com.mycompany.htbanve.service.QLCXsServices;
-import com.mycompany.htbanve.service.Utils;
-
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -28,23 +23,13 @@ import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
-import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
-import javafx.util.Callback;
-import javax.swing.GroupLayout.Group;
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -119,119 +104,45 @@ public class AddChuyenXeController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        conn = JdbcUtils.getConnection(); 
+        tbvQLCX.setEditable(true);
 
-        try {
+        loadTables();
+        loadQLCXData("");
+        this.filterField.textProperty().addListener((obj) -> {
+        loadQLCXData(this.filterField.getText());
+    });
+    try {
+        UpdateQLCX();
+        FindCX();
 
-            conn = JdbcUtils.getConnection();
-
-//        try{
-//            ObservableList<QLCX> data = FXCollections.observableArrayList(QLCXsServices.getDataQLCXs(this.filterField.getText()));
-//              QLCXsServices.getDataQLCXs(this.filterField.getText()).forEach(i ->System.out.println(i.getId()));
-//        }catch (Exception e){
-//            
-//        }
-            tbvQLCX.setEditable(true);
-
-//        ResultSet rs = null;
-//        try {
-//            rs = conn.createStatement().executeQuery("select * from qlcx");
-//        } catch (SQLException ex) {
-//            Logger.getLogger(AddChuyenXeController.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//        try {
-//            while(rs.next()){
-//                try {
-//                    data.add(new QLCX(rs.getInt("id"),rs.getString("tencx"),rs.getString("bsx"),rs.getString("loaixe")
-//                            ,rs.getString("giokh"),rs.getString("ngaykh"),rs.getString("giave"),rs.getString("tennv"),rs.getString("sdtnv"),rs.getString("ghe")));
-//                } catch (SQLException ex) {
-//                    Logger.getLogger(AddChuyenXeController.class.getName()).log(Level.SEVERE, null, ex);
-//                }
-//
-//                
-//            }
-//        } catch (SQLException ex) {
-//            Logger.getLogger(AddChuyenXeController.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//
-            loadTables();
-            loadQLCXData("");
-            this.filterField.textProperty().addListener((obj) -> {
-                loadQLCXData(this.filterField.getText());
-            });
-
-            try {
-                UpdateQLCX();
-                FindCX();
-
-            } catch (SQLException ex) {
-                Logger.getLogger(AddChuyenXeController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-// this.tbvQLCX.setItems(data);
-        } catch (SQLException ex) {
-            Logger.getLogger(AddChuyenXeController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        // this.tbvQLCX.setItems(data); 
+    } catch (SQLException ex) {
+        Logger.getLogger(AddChuyenXeController.class.getName()).log(Level.SEVERE, null, ex);
+    }
     }
 
     @FXML
     public void getSelected (MouseEvent event){
         
+        QLCX i = this.tbvQLCX.getSelectionModel().getSelectedItem();
+
+        txtid.setText(String.valueOf(i.getId()));
+        txttencx.setText(i.getTencx());
+        txtbsx.setText(i.getBsx());
+        txtloaixe.setText(i.getLoaixe());
+        txtgiokh.setText(i.getGiokh());
+        txtgiave.setText(i.getGiave());
+        txtghe.setText(i.getGhe());
+        txttennv.setText(i.getTennv());
+        txtsdtnv.setText(i.getSdtnv());
         
-//        this.tbvQLCX.setRowFactory(obj -> {
-//            TableRow row = new TableRow();
-//            
-//            row.setOnMouseClicked(evt -> {
-                try {
-                    QLCX i = this.tbvQLCX.getSelectionModel().getSelectedItem();
-                     
-                    txtid.setText(String.valueOf(i.getId()));
-                    txttencx.setText(i.getTencx());
-                    txtbsx.setText(i.getBsx());
-                    txtloaixe.setText(i.getLoaixe());
-                    txtgiokh.setText(i.getGiokh());
-                    txtgiave.setText(i.getGiave());
-                    txtghe.setText(i.getGhe());
-                    txttennv.setText(i.getTennv());
-                    txtsdtnv.setText(i.getSdtnv());
-                    
-//                    txtngaykh.setDayCellFactory((Callback<DatePicker, DateCell>) i.getNgaykh());
-                    
-                } catch (SQLException ex) {
-                    Logger.getLogger(AddChuyenXeController.class.getName()).log(Level.SEVERE, null, ex);
-                }
-//            });
-//            
-//            return row;
-//        });
     }
     // Load dl len table view
     public void UpdateQLCX() throws SQLException {
         conn = JdbcUtils.getConnection();
         ObservableList<QLCX> data = FXCollections.observableArrayList();
-        tbvQLCX.setItems(data);
-    
-//       
-//        ResultSet rs = conn.createStatement().executeQuery("select * from htbanve.qlcx");
-//        //
-//        
-//        
-//        /**/
-//        
-//        ArrayList<QLCX> qlcxList = new ArrayList();
-//        try{
-//            QLCX qlcx;
-//            while(rs.next()){
-//            //data.add(new QLCX(rs.getInt("id"),rs.getString("tencx"),rs.getString("bsx").toString(),rs.getString("loaixe").toString(),rs.getString("giokh").toString(),rs.getString("ngaykh").toString(),rs.getString("giave").toString(),rs.getString("tennv").toString(),rs.getString("sdtnv").toString(),rs.getString("ghe")));
-//            qlcx = new QLCX(rs.getInt("id"),rs.getString("tencx"),rs.getString("bsx"),rs.getString("loaixe"),rs.getString("giokh"),rs.getString("ngaykh"),rs.getString("giave"),rs.getString("tennv"),rs.getString("sdtnv"),rs.getString("ghe"));
-//            qlcxList.add(qlcx);
-//        }
-//        }
-//        catch(SQLException ex){
-//            Logger.getLogger(AddChuyenXeController.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-
     }
-
+    
     @FXML
     public void AddQLCX() throws SQLException {
         conn = JdbcUtils.getConnection();
@@ -240,12 +151,12 @@ public class AddChuyenXeController implements Initializable {
                 || "".equals(txtgiokh.getText()) || (txtngaykh.getValue()) == null || "".equals(txtgiave.getText())
                 || "".equals(txttennv.getText()) || "".equals(txtsdtnv.getText()) || "".equals(txtloaixe.getText())
                 || "".equals(txtghe.getText())) {
-            JOptionPane.showMessageDialog(null, "Chua nhap du thong tin", "about", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Chưa nhập đủ thông tin.", "about", JOptionPane.INFORMATION_MESSAGE);
         } else {
             try {
-                QLCXsServices.addCX(txtid.getText(), txttencx.getText(), txtbsx.getText(), txtgiokh.getText(), txtngaykh.getValue().toString(), txtgiave.getText(),
-                         txttennv.getText(), txtsdtnv.getText(), txtloaixe.getText(), txtghe.getText());
-                JOptionPane.showMessageDialog(null, "Đã thêm chuyến xe thành công !!!");
+                QLCXsServices.addCX(txtid.getText(), txttencx.getText(), txtbsx.getText(), txtloaixe.getText(), txtngaykh.getValue().toString(), txtgiokh.getText(), txtgiave.getText()
+                         , txtghe.getText(), txttennv.getText(), txtsdtnv.getText());
+                JOptionPane.showMessageDialog(null, "Đã thêm chuyến xe thành công.");
                 UpdateQLCX();
                 FindCX();
             } catch (SQLException e) {
@@ -260,12 +171,12 @@ public class AddChuyenXeController implements Initializable {
                 || "".equals(txtgiokh.getText()) || "".equals(txtngaykh.getValue()) || "".equals(txtgiave.getText())
                 || "".equals(txttennv.getText()) || "".equals(txtsdtnv.getText()) || "".equals(txtloaixe.getText())
                 || "".equals(txtghe.getText())) {
-            JOptionPane.showMessageDialog(null, "Chua nhap du thong tin", "about", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Chưa nhập đủ thông tin.", "about", JOptionPane.INFORMATION_MESSAGE);
         } else {
             try {
-                QLCXsServices.EditCX(txtid.getText(), txttencx.getText(), txtbsx.getText(), txtloaixe.getText(), txtngaykh.getValue().toString(),
-                         txtgiokh.getText(), txtgiave.getText(), txttennv.getText(), txtsdtnv.getText(), txtghe.getText());
-                JOptionPane.showMessageDialog(null, "update");
+                QLCXsServices.EditCX(txtid.getText(), txttencx.getText(), txtbsx.getText(), txtloaixe.getText(), txtngaykh.getValue().toString(), txtgiokh.getText(), txtgiave.getText()
+                         , txtghe.getText(), txttennv.getText(), txtsdtnv.getText());
+                JOptionPane.showMessageDialog(null, "Cập nhật thông tin chuyến xe thành công.");
                 UpdateQLCX();
                 FindCX();
             } catch (SQLException e) {
@@ -283,12 +194,14 @@ public class AddChuyenXeController implements Initializable {
             Connection conn = JdbcUtils.getConnection();
             QLCXsServices s = new QLCXsServices(conn);
             if (s.deleteQLCX(p.getId()) == true  ) {
-                Utils.getBox("SUCCESSFUL", Alert.AlertType.INFORMATION).show();
-                loadQLCXData("");
-                UpdateQLCX();
+                JOptionPane.showMessageDialog(null, "Xóa chuyến xe thành công.");
+//  /              Utils.getBox("SUCCESSFUL", Alert.AlertType.INFORMATION).show();
                 
+                UpdateQLCX();
+                FindCX();
             } else {
-                Utils.getBox("FAILED", Alert.AlertType.ERROR).show();
+                JOptionPane.showMessageDialog(null, "Xóa chuyến xe thất bại.");
+             //   Utils.getBox("FAILED", Alert.AlertType.ERROR).show();
             }
             
             
@@ -313,22 +226,6 @@ public class AddChuyenXeController implements Initializable {
 
                 if (person.getTencx().toLowerCase().indexOf(lowerCaSeFilter) != -1) {
                     return true;
-                } else if (person.getBsx().toLowerCase().indexOf(lowerCaSeFilter) != -1) {
-                    return true;
-                } else if (person.getGiokh().toLowerCase().indexOf(lowerCaSeFilter) != -1) {
-                    return true;
-                } else if (person.getLoaixe().toLowerCase().indexOf(lowerCaSeFilter) != -1) {
-                    return true;
-                } else if (person.getNgaykh().toLowerCase().indexOf(lowerCaSeFilter) != -1) {
-                    return true;
-                } else if (person.getGiave().toLowerCase().indexOf(lowerCaSeFilter) != -1) {
-                    return true;
-                } else if (person.getTennv().toLowerCase().indexOf(lowerCaSeFilter) != -1) {
-                    return true;
-                } else if (person.getGhe().toLowerCase().indexOf(lowerCaSeFilter) != -1) {
-                    return true;
-                } else if (person.getSdtnv().toLowerCase().indexOf(lowerCaSeFilter) != -1) {
-                    return true;
                 } else {
                     return false;
                 }
@@ -351,18 +248,18 @@ public class AddChuyenXeController implements Initializable {
 
         TableColumn colloaixe = new TableColumn("Loại Xe");
         colloaixe.setCellValueFactory(new PropertyValueFactory("loaixe"));
+        
+        TableColumn colngaykh = new TableColumn("Ngày Khởi Hành");
+        colngaykh.setCellValueFactory(new PropertyValueFactory("ngaykh"));
 
         TableColumn colgiokh = new TableColumn("Giờ Khởi Hành");
         colgiokh.setCellValueFactory(new PropertyValueFactory("giokh"));
 
-        TableColumn colngaykh = new TableColumn("Ngày Khởi Hành");
-        colngaykh.setCellValueFactory(new PropertyValueFactory("ngaykh"));
-
         TableColumn colgiave = new TableColumn("Giá Vé");
         colgiave.setCellValueFactory(new PropertyValueFactory("giave"));
-        
+
         TableColumn colghe = new TableColumn("Ghế");
-        colghe.setCellValueFactory(new PropertyValueFactory("ghe"));
+        colghe.setCellValueFactory(new PropertyValueFactory("ghe")); 
 
         TableColumn coltennv = new TableColumn("Tên Nhân Viên");
         coltennv.setCellValueFactory(new PropertyValueFactory("tennv"));
@@ -370,47 +267,8 @@ public class AddChuyenXeController implements Initializable {
         TableColumn colsdtnv = new TableColumn("SĐT Nhân Viên");
         colsdtnv.setCellValueFactory(new PropertyValueFactory("sdtnv"));
 
-        
-  
-//        TableColumn colAction = new TableColumn();
-//        colAction.setCellFactory((obj) -> {
-//            Button btn = new Button("Xóa");
-//            
-//            btn.setOnAction(evt -> {
-//                Utils.getBox("Ban chac chan xoa khong?", Alert.AlertType.CONFIRMATION)
-//                     .showAndWait().ifPresent(bt -> {
-//                         if (bt == ButtonType.OK) {
-//                             try {
-//                                 TableCell cell = (TableCell) ((Button) evt.getSource()).getParent();
-//                                 QLCX p = (QLCX) cell.getTableRow().getItem();
-//                                 
-//                                 Connection conn = JdbcUtils.getConnection();
-//                                 QLCXsServices s = new QLCXsServices(conn);
-//                                 
-//                                 if (s.deleteQLCX(p.getId()) == true) {
-//                                     Utils.getBox("SUCCESSFUL", Alert.AlertType.INFORMATION).show();
-//                                     loadQLCXData("");
-//                                 } else
-//                                     Utils.getBox("FAILED", Alert.AlertType.ERROR).show();
-//                                 /**/
-//                                 conn.close();
-//                             } catch (SQLException ex) {
-//                                 
-//                                 ex.printStackTrace();
-//                                 Logger.getLogger(AddChuyenXeController.class.getName()).log(Level.SEVERE, null, ex);
-//                             }
-//                         }
-//                     });
-//                
-//                
-//               
-//            });
-//            
-//            TableCell cell = new TableCell();
-//            cell.setGraphic(btn);
-//            return cell;
-//        });
-        this.tbvQLCX.getColumns().addAll(colid, colNameCX, colbsx, colloaixe, colgiokh, colngaykh, colgiave, colghe, coltennv, colsdtnv);
+// 
+        this.tbvQLCX.getColumns().addAll(colid, colNameCX, colbsx, colloaixe, colngaykh, colgiokh, colgiave, colghe, coltennv, colsdtnv);
 
     }
 
@@ -421,7 +279,7 @@ public class AddChuyenXeController implements Initializable {
             Connection conn = JdbcUtils.getConnection();
             QLCXsServices qls = new QLCXsServices(conn);
 
-            this.tbvQLCX.setItems(FXCollections.observableList(qls.getDataQLCXs(kw)));//(kw)
+            this.tbvQLCX.setItems(FXCollections.observableList(qls.getDataQLCXs(kw)));
 
             conn.close();
         } catch (SQLException ex) {

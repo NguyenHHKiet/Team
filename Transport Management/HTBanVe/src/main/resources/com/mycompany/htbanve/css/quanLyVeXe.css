@@ -1,0 +1,50 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Dec 12, 2020, 9:58:54 AM
+    Author     : Truc Lam
+*/
+
+.GridPane{
+    -fx-font-family:"SVN-Gotham Black";
+    -fx-text-fill: #2F2A2B;
+    
+}
+.label{
+    -fx-font-family:"SVN-Gotham Bold";
+    -fx-text-fill:#2F2A2B;
+}
+.textfield{
+    -fx-background-color:#FFFFFF;
+    -fx-font-family: "SVN-Gotham Light";
+}
+.button{
+    -fx-background-color:#004AAD;
+    -fx-text-fill:#FFEFB7;
+    -fx-font-family:"SVN-Gotham Black";
+}
+.button:hover{
+    -fx-background-color:#FFA000;
+    -fx-text-fill:#2F2A2B;
+}
+
+#quaylaitrangchu{
+    -fx-background-color:#2F2A2B;
+    -fx-font-family:"SVN-Gotham Bold";
+}
+#quaylaitrangchu:hover{
+    -fx-background-color:#FFA000;
+    -fx-text-fill:#2F2A2B;
+}
+
+.tableview{
+    -fx-font-family:"SVN-Gotham Bold";
+    -fx-background-color:#2F2A2B;
+    -fx-text-fill: #FFA000;
+}
+.label header{
+    -fx-text-fill:#FFA000;
+}

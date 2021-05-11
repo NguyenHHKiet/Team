@@ -10,9 +10,9 @@ package com.mycompany.htbanve.pojo;
  * @author Tuan Anh
  */
 public class QLBV {
-    private String id,tencx,bsx,loaixe,ngaykh,giokh,giave,ghe,tenkh,sdtkh,tennv,sdtnv,idphanbiet;
-    public QLBV(String id,String tencx, String bsx,String loaixe, String ngaykh, String giokh, String giave,String ghe,
-            String tenkh, String sdtkh,String tennv, String sdtnv, String idphanbiet) {
+    private String id,tencx,bsx,loaixe,ngaykh,giokh,giave,ghe,tennv,sdtnv,tenkh,sdtkh,idphanbiet;
+    public QLBV(String id,String tencx, String bsx,String loaixe, String ngaykh, String giokh, String giave,String ghe
+            ,String tennv, String sdtnv,String tenkh, String sdtkh, String idphanbiet) {
         this.id = id;
         this.tencx = tencx;
         this.bsx = bsx;

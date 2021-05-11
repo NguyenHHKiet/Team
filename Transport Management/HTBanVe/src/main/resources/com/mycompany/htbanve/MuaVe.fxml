@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
@@ -17,10 +16,10 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: #c8dcf4;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.htbanve.MuaVeController">
+<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1519.0" style="-fx-background-color: #c8dcf4;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.htbanve.MuaVeController">
    <children>
       <AnchorPane layoutX="184.0" layoutY="58.0" style="-fx-background-color: #2F2A2B;" visible="false" AnchorPane.bottomAnchor="542.0" AnchorPane.leftAnchor="184.0" AnchorPane.rightAnchor="416.0" AnchorPane.topAnchor="58.0" />
-      <GridPane layoutX="50.0" layoutY="99.0" stylesheets="@css/addChuyenXe.css">
+      <GridPane layoutX="50.0" layoutY="95.0" prefHeight="413.0" prefWidth="478.0" stylesheets="@css/addChuyenXe.css">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="359.0" minWidth="10.0" prefWidth="123.6" />
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="617.0" minWidth="10.0" prefWidth="380.4" />
@@ -41,7 +40,6 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <DatePicker fx:id="txtngaykh" prefHeight="26.0" prefWidth="187.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
             <Label prefHeight="21.0" prefWidth="150.0" stylesheets="@css/addChuyenXe.css" text="Tên chuyến xe:" GridPane.rowIndex="1" />
             <Label text="Biển số xe:" GridPane.rowIndex="2" />
             <Label text="Loại xe:" GridPane.rowIndex="3" />
@@ -50,24 +48,25 @@
             <Label text="Giá vé:" GridPane.rowIndex="6" />
             <Label text="Mô tả:" GridPane.rowIndex="8" />
             <Label text="Tên nhân viên:" GridPane.rowIndex="9" />
-            <Label text="SĐT liên hệ:" GridPane.rowIndex="10" />
-            <TextField fx:id="txttencx" promptText="Nhập tên chuyến xe" styleClass="textfield" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextField fx:id="txtBSX" prefHeight="25.0" prefWidth="444.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <TextField fx:id="txtbsx" prefHeight="25.0" prefWidth="444.0" promptText="Nhập biển số xe" styleClass="textfield" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <TextField fx:id="txtgiokh" promptText="Nhập giờ khởi hành" styleClass="textfield" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-            <TextArea disable="true" prefHeight="200.0" prefWidth="200.0" text="Hành khách có mặt tại văn phòng trước giờ khởi hành !&#10;To be present at this office before departure time !" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-            <TextField fx:id="txttennv" promptText="Nhập tên nhân viên" styleClass="textfield" GridPane.columnIndex="1" GridPane.rowIndex="9" />
-            <TextField fx:id="txtsdtnv" promptText="Nhập số điện thoại liên hệ" styleClass="textfield" GridPane.columnIndex="1" GridPane.rowIndex="10" />
-            <TextField fx:id="txtloaixe" promptText="Nhập loại xe" styleClass="textfield" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <TextField fx:id="txtgiave" promptText="Nhập giá vé" styleClass="textfield" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            <Label text="SĐT nhân viên:" GridPane.rowIndex="10" />
+            <TextField fx:id="txttencx" disable="true" prefHeight="19.0" prefWidth="369.0" promptText="Nhập tên chuyến xe" styleClass="textfield" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="txtBSX" disable="true" prefHeight="25.0" prefWidth="444.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField fx:id="txtbsx" disable="true" prefHeight="25.0" prefWidth="444.0" promptText="Nhập biển số xe" styleClass="textfield" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField fx:id="txtgiokh" disable="true" promptText="Nhập giờ khởi hành" styleClass="textfield" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <TextArea disable="true" prefHeight="48.0" prefWidth="368.0" text="Hành khách có mặt tại văn phòng trước giờ khởi hành !&#10;To be present at this office before departure time !" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+            <TextField fx:id="txttennv" disable="true" prefHeight="12.0" prefWidth="368.0" promptText="Nhập tên nhân viên" styleClass="textfield" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+            <TextField fx:id="txtsdtnv" disable="true" prefHeight="5.0" prefWidth="368.0" promptText="Nhập số điện thoại nhân viên" styleClass="textfield" GridPane.columnIndex="1" GridPane.rowIndex="10" />
+            <TextField fx:id="txtloaixe" disable="true" promptText="Nhập loại xe" styleClass="textfield" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <TextField fx:id="txtgiave" disable="true" promptText="Nhập giá vé" styleClass="textfield" GridPane.columnIndex="1" GridPane.rowIndex="6" />
             <Label text="Số ghế:" GridPane.rowIndex="7" />
-            <TextField fx:id="txtghe" promptText="Nhập số ghế còn trống" styleClass="textfield" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+            <TextField fx:id="txtghe" disable="true" promptText="Nhập số ghế còn trống" styleClass="textfield" GridPane.columnIndex="1" GridPane.rowIndex="7" />
             <Label text="Tên người Đặt vé:" GridPane.rowIndex="11" />
-            <TextField fx:id="txttenkh" prefHeight="25.0" prefWidth="381.0" promptText="Nhập tên khách hàng" styleClass="textfield" GridPane.columnIndex="1" GridPane.rowIndex="11" />
+            <TextField fx:id="txttenkh" prefHeight="10.0" prefWidth="368.0" promptText="Nhập tên khách hàng" styleClass="textfield" GridPane.columnIndex="1" GridPane.rowIndex="11" />
             <Label text="SĐT liên hệ:" GridPane.rowIndex="12" />
             <TextField fx:id="txtsdtkh" promptText="Nhập số điện thoại liên hệ" styleClass="textfield" GridPane.columnIndex="1" GridPane.rowIndex="12" />
-            <TextField fx:id="txtid" promptText="Nhập ID chuyến xe không được trùng" styleClass="textfield" stylesheets="@css/addChuyenXe.css" GridPane.columnIndex="1" />
+            <TextField fx:id="txtid" disable="true" prefWidth="369.0" promptText="Nhập ID chuyến xe không được trùng" styleClass="textfield" stylesheets="@css/addChuyenXe.css" GridPane.columnIndex="1" />
             <Label text="ID:" textFill="#fff0bd" />
+            <TextField fx:id="txtngaykh" disable="true" promptText="Nhập ngày khởi hành" styleClass="textfield" GridPane.columnIndex="1" GridPane.rowIndex="4" />
          </children>
       </GridPane>
       <Button layoutX="180.0" layoutY="530.0" mnemonicParsing="false" onAction="#AddQLBV" prefHeight="50.0" prefWidth="150.0" stylesheets="@css/addChuyenXe.css" text="ĐẶT VÉ">
@@ -75,7 +74,7 @@
             <DropShadow color="#b6c9d6" offsetX="5.0" offsetY="4.0" radius="11.192499999999999" width="25.77" />
          </effect>
       </Button>
-      <Label alignment="CENTER" layoutX="159.0" layoutY="43.0" stylesheets="@css/title.css" text="ĐẶT VÉ CHUYẾN XE" textFill="#f08610">
+      <Label alignment="CENTER" layoutX="160.0" layoutY="30.0" stylesheets="@css/title.css" text="ĐẶT VÉ CHUYẾN XE" textFill="#f08610">
          <font>
             <Font name="SVN-GothamBlack" size="39.0" />
          </font>
@@ -94,9 +93,9 @@
             </BoxBlur>
          </effect>
       </Label>
-      <TableView fx:id="tbvMuaVe" layoutX="603.0" layoutY="99.0" onMouseClicked="#getSelected" />
-      <TextField fx:id="filterField" layoutX="727.0" layoutY="46.0" prefHeight="25.0" prefWidth="214.0" promptText="Nhập thông tin" styleClass="textfield" stylesheets="@css/addChuyenXe.css" />
-      <Label layoutX="603.0" layoutY="46.0" prefHeight="25.0" prefWidth="124.0" stylesheets="@css/addChuyenXe.css" text="Tìm chuyến xe:" />
+      <TableView fx:id="tbvMuaVe" layoutX="603.0" layoutY="93.0" onMouseClicked="#getSelected" prefHeight="470.0" prefWidth="900.0" />
+      <TextField fx:id="filterField" layoutX="704.0" layoutY="58.0" prefHeight="18.0" prefWidth="214.0" promptText="Nhập tên chuyến xe" styleClass="textfield" stylesheets="@css/addChuyenXe.css" />
+      <Label layoutX="603.0" layoutY="58.0" prefHeight="25.0" prefWidth="124.0" stylesheets="@css/addChuyenXe.css" text="Tìm chuyến xe:" />
       <Button id="quaylaitrangchu" layoutX="405.0" layoutY="530.0" mnemonicParsing="false" onAction="#QuayLai" prefHeight="50.0" prefWidth="150.0" stylesheets="@css/addChuyenXe.css" text="Quay lại" />
    </children>
 </AnchorPane>

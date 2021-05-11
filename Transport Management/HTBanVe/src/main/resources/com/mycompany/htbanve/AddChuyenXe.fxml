@@ -17,11 +17,11 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" style="-fx-background-color: #c8dcf4;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.htbanve.AddChuyenXeController">
+<AnchorPane id="AnchorPane" prefHeight="651.0" prefWidth="1471.0" style="-fx-background-color: #c8dcf4;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.htbanve.AddChuyenXeController">
    <children>
       <AnchorPane layoutX="151.0" layoutY="38.0" style="-fx-background-color: #2F2A2B;" visible="false" />
-      <Button id="quaylaitrangchu" layoutX="1165.0" layoutY="79.0" mnemonicParsing="false" onAction="#QuayLai" stylesheets="@css/addChuyenXe.css" text="Quay lại" />
-      <GridPane layoutX="31.0" layoutY="127.0" stylesheets="@css/addChuyenXe.css">
+      <Button id="quaylaitrangchu" layoutX="704.0" layoutY="538.0" mnemonicParsing="false" onAction="#QuayLai" prefHeight="50.0" prefWidth="150.0" stylesheets="@css/addChuyenXe.css" text="Quay lại" />
+      <GridPane layoutX="31.0" layoutY="112.0" prefHeight="350.0" prefWidth="486.0" stylesheets="@css/addChuyenXe.css">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="359.0" minWidth="10.0" prefWidth="123.6" />
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="617.0" minWidth="10.0" prefWidth="380.4" />
@@ -61,24 +61,24 @@
             <TextField fx:id="txtgiave" promptText="Nhập giá vé" styleClass="textfield" GridPane.columnIndex="1" GridPane.rowIndex="6" />
             <Label text="ID:" textFill="#fff0bd" />
             <TextField fx:id="txtid" promptText="Nhập ID chuyến xe không được trùng" styleClass="textfield" stylesheets="@css/addChuyenXe.css" GridPane.columnIndex="1" />
-            <Label text="Số ghế:" GridPane.rowIndex="7" />
+            <Label text="Số lượng ghế:" GridPane.rowIndex="7" />
             <TextField fx:id="txtghe" promptText="Nhập số ghế còn trống" styleClass="textfield" GridPane.columnIndex="1" GridPane.rowIndex="7" />
          </children>
       </GridPane>
-      <TableView fx:id="tbvQLCX" layoutX="563.0" layoutY="127.0" onMouseClicked="#getSelected" stylesheets="@css/addChuyenXe.css" />
-      <Button layoutX="305.0" layoutY="474.0" mnemonicParsing="false" onAction="#Edit" stylesheets="@css/addChuyenXe.css" text="CẬP NHẬT">
+      <TableView fx:id="tbvQLCX" layoutX="545.0" layoutY="113.0" onMouseClicked="#getSelected" prefHeight="386.0" prefWidth="900.0" stylesheets="@css/addChuyenXe.css" />
+      <Button layoutX="332.0" layoutY="538.0" mnemonicParsing="false" onAction="#Edit" prefHeight="50.0" prefWidth="150.0" stylesheets="@css/addChuyenXe.css" text="CẬP NHẬT">
          <effect>
             <DropShadow color="#b6c9d6" offsetX="5.0" offsetY="4.0" radius="11.192499999999999" width="25.77" />
          </effect></Button>
-      <Button layoutX="159.0" layoutY="474.0" mnemonicParsing="false" onAction="#AddQLCX" stylesheets="@css/addChuyenXe.css" text="LƯU CHUYẾN XE">
+      <Button layoutX="146.0" layoutY="538.0" mnemonicParsing="false" onAction="#AddQLCX" prefHeight="50.0" prefWidth="150.0" stylesheets="@css/addChuyenXe.css" text="THÊM CHUYẾN XE">
          <effect>
             <DropShadow blurType="TWO_PASS_BOX" color="#b1afd5" offsetX="5.0" offsetY="4.0" radius="14.17" width="37.68" />
          </effect></Button>
-      <Button layoutX="417.0" layoutY="474.0" mnemonicParsing="false" onAction="#DeleteQLCX" stylesheets="@css/addChuyenXe.css" text="XÓA">
+      <Button layoutX="514.0" layoutY="538.0" mnemonicParsing="false" onAction="#DeleteQLCX" prefHeight="50.0" prefWidth="150.0" stylesheets="@css/addChuyenXe.css" text="XÓA">
          <effect>
             <DropShadow color="#bbd0ed" offsetX="5.0" offsetY="4.0" />
          </effect></Button>
-      <TextField fx:id="filterField" layoutX="728.0" layoutY="75.0" promptText="Nhập thông tin" styleClass="textfield" stylesheets="@css/addChuyenXe.css" />
+      <TextField fx:id="filterField" layoutX="696.0" layoutY="66.0" prefHeight="26.0" prefWidth="181.0" promptText="Nhập tên chuyến xe" styleClass="textfield" stylesheets="@css/addChuyenXe.css" />
       <Label alignment="CENTER" layoutX="146.0" layoutY="46.0" stylesheets="@css/title.css" text="THÊM CHUYẾN XE" textFill="#f08610">
          <font>
             <Font name="SVN-GothamBlack" size="39.0" />
@@ -98,6 +98,6 @@
             </BoxBlur>
          </effect>
       </Label>
-      <Label layoutX="625.0" layoutY="79.0" stylesheets="@css/addChuyenXe.css" text="Tìm chuyến xe:" />
+      <Label layoutX="589.0" layoutY="70.0" stylesheets="@css/addChuyenXe.css" text="Tìm chuyến xe:" />
    </children>
 </AnchorPane>

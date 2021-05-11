@@ -26,8 +26,6 @@ public class ChonChucNangController implements Initializable{
      * @throws java.sql.SQLException
      */
     @FXML
-//     public void SwitchtoQLVX() throws IOException {
-//         App.setRoot("QuanLyVeXe");
     public void SwitchtoQLVX(ActionEvent event) throws IOException, SQLException{
         App.setRoot("QuanLyVeXe");
         String a =(LocalDate.now().toString());

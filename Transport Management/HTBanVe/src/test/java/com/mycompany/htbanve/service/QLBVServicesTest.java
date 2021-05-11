@@ -41,20 +41,20 @@ public class QLBVServicesTest {
     
     @Test
     public void testGetDataQLBV() throws Exception {
-        try {
-            List<QLBV> result = QLBVServices.getDataQLBV();
-            Assert.assertEquals(4, result.size());
+//        try {
+            ObservableList<QLBV> result = QLBVServices.getDataQLBV2();
+            Assert.assertEquals(5, result.size());
             System.err.println("Test Successfully");
-        } catch (SQLException ex) {
-            System.err.println("Test Unsuccessfully");
-        }
+//        } catch (SQLException ex) {
+//            System.err.println("Test Unsuccessfully");
+//        }
     }
 
     @Test
     public void testGetDataQLBV2() {
         try {       
             ObservableList<QLBV> result = QLBVServices.getDataQLBV2();
-            Assert.assertEquals(4, result.size());
+            Assert.assertEquals(5, result.size());
             System.err.println("Test Successfully");
         } catch (Exception e) {
             System.err.println("Test Unsuccessfully");
@@ -70,7 +70,7 @@ public class QLBVServicesTest {
         String value3 = "A05";
         String value4 = "20690da8-d2b3-4898-8434-f3bb677a9e53";
         QLBVServices.updateQLBV(value1, value2, value3, value4);
-        List<QLBV> list = QLBVServices.getDataQLBV();
+        ObservableList<QLBV> list = QLBVServices.getDataQLBV2();
         for (QLBV a1 : list){
             if(a1.getTenkh().equals("Lu") && 
                     a1.getSdtkh().equals("123456") &&  
@@ -105,8 +105,8 @@ public class QLBVServicesTest {
         String value11 = "l";
         String value12 = "m";
         String value13 = "n";
-        QLBVServices.addVe(value1, value2, value3, value4, value5, value6, value7, value8, value9, value10, value11, value12, value13);
-        List<QLBV> list = QLBVServices.getDataQLBV();
+        QLBVServices.addVe(value1, value2, value3, value4, value5, value6, value7, value8, value9, value10, value11, value12);
+        ObservableList<QLBV> list = QLBVServices.getDataQLBV2();
         for (QLBV a1 : list){
             if(a1.getId().equals("a") && a1.getTencx().equals("b") &&  a1.getBsx().equals("c")&&
                     a1.getGiokh().equals("d") && a1.getNgaykh().equals("e") &&  a1.getGiave().equals("f")&&
@@ -150,16 +150,16 @@ public class QLBVServicesTest {
     public void testGiamGhe() {
         String a= null,b=null;
         try{
-        String value1 = "4";
-        String value2 = "c70f85b4-b598-4f41-a540-ae7427da23a6";
+        String value1 = "20";
+        String value2 = "1";
         QLBVServices.GiamGhe(value1, value2);
-        List<QLCX> list = QLCXsServices.getDataQLCXs();
+        ObservableList<QLCX> list = QLCXsServices.getDataQLCX();
         for (QLCX a1 : list){
             {
                 a = a1.getGhe();
             }
         }
-            Assert.assertEquals("4", a);
+            Assert.assertEquals("29", a);
         }catch(Exception ex){
             JOptionPane.showMessageDialog(null, ex);
         }
@@ -172,14 +172,14 @@ public class QLBVServicesTest {
         String a = "2020-12-13";
         String b = "15:30";
         QLBVServices.KiemtraNgayGio(a, b);
-        List<QLBV> list = QLBVServices.getDataQLBV();
+        ObservableList<QLBV> list = QLBVServices.getDataQLBV2();
         for (QLBV a1 : list){
                 q = a1.getNgaykh();
                 w = a1.getGiokh();
             }
             Assert.assertNotNull( q);
             Assert.assertNotNull( w);
-        List<QLCX> list1 = QLCXsServices.getDataQLCXs();
+        ObservableList<QLCX> list1 = QLCXsServices.getDataQLCX();
         for(QLCX a2 :list1){
             e = a2.getNgaykh();
             r = a2.getGiokh();
@@ -197,17 +197,17 @@ public class QLBVServicesTest {
         try{
         String a = "a";
         String b = "52083611-94b5-46bc-ab8a-918442e763cb";
-        QLBVServices.XoaVe(a, b);
-        List<QLBV> list = QLBVServices.getDataQLBV();
+        QLBVServices.XoaVe(a);
+        ObservableList<QLBV> list = QLBVServices.getDataQLBV2();
         for (QLBV a1 : list){
                 q = a1.getId();
             }
             Assert.assertNotNull( q);
-        List<QLCX> list1 = QLCXsServices.getDataQLCXs();
+        ObservableList<QLCX> list1 = QLCXsServices.getDataQLCX();
         for(QLCX a2 :list1){
             e = a2.getGhe();
         }
-            Assert.assertEquals("6", e);
+            Assert.assertEquals("29", e);
         }catch(Exception ex){
             JOptionPane.showMessageDialog(null, ex);
         }  

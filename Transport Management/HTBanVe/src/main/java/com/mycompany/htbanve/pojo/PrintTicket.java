@@ -20,33 +20,24 @@ public class PrintTicket {
     private String tenkh;
     private String sdt;
     private String tennv;
-    private String ngayin;
-    private String gioin;
-//    
-//    public PrintTicket(String id, String tencx, String bsx, String ngaykh, String giokh, 
-//            String ghe, String gia, String tenkh, String sdt, String tennv, String ngayin, String gioin) {
-//        this.id = id;
-//        this.tencx = tencx;
-//        this.bsx = bsx;
-//        this.ngaykh = ngaykh;
-//        this.giokh = giokh;
-//        this.ghe = ghe;
-//        this.gia = gia;
-//        this.tenkh = tenkh;
-//        this.sdt = sdt;
-//        this.tennv = tennv;
-//        this.ngayin = ngayin;
-//        this.gioin = gioin;
-//    }
+
+    
+    public PrintTicket(String id, String tencx, String bsx, String ngaykh, String giokh, 
+            String gia, String ghe, String tenkh, String sdt, String tennv) {
+        this.id = id;
+        this.tencx = tencx;
+        this.bsx = bsx;
+        this.ngaykh = ngaykh;
+        this.giokh = giokh;
+        this.ghe = ghe;
+        this.gia = gia;
+        this.tenkh = tenkh;
+        this.sdt = sdt;
+        this.tennv = tennv;
+    }
     
 
-//    public PrintTicket(TextField txtidrandom, TextField txttencx, TextField txtbsx, TextField txtngaykh, TextField txtgiokh, TextField txtsoghe, TextField txtgiave, TextField txttenkh, TextField txtsdtkh, TextField txttennv, TextField txtngayht) {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//    }
-//
-//    public PrintTicket(String text, TextField txttencx, TextField txtbsx, TextField txtngaykh, TextField txtgiokh, TextField txtsoghe, TextField txtgiave, TextField txttenkh, TextField txtsdtkh, TextField txttennv, TextField txtngayht) {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//    }
+
     /**
      * @return the id
      */
@@ -185,33 +176,5 @@ public class PrintTicket {
      */
     public void setTennv(String tennv) {
         this.tennv = tennv;
-    }
-
-    /**
-     * @return the ngayin
-     */
-    public String getNgayin() {
-        return ngayin;
-    }
-
-    /**
-     * @param ngayin the ngayin to set
-     */
-    public void setNgayin(String ngayin) {
-        this.ngayin = ngayin;
-    }
-    
-    /**
-     * @return the gioin
-     */
-    public String getGioin() {
-        return gioin;
-    }
-
-    /**
-     * @param gioin the gioin to set
-     */
-    public void setGioin(String gioin) {
-        this.gioin = gioin;
     }
 }

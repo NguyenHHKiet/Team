@@ -58,7 +58,7 @@ public class AdminServicesTest {
     public void testGetDataAdmin() {
         try {
             List<Admin> result = AdminServices.getDataAdmin();
-            Assert.assertEquals(9, result.size());
+            Assert.assertEquals(7, result.size());
             System.err.println("Test Successfully");
         } catch (SQLException ex) {
             System.err.println("Test Unsuccessfully");
@@ -72,24 +72,24 @@ public class AdminServicesTest {
     public void testAddTKAdmin(){
         String q = null,w = null,e =null;
         try{
-        String a = "test000";
+        String a = "Mai";
         String b = "123456";
-        String c = "test000@ou.edu.vn";
+        String c = "Mai@gmail.com";
         AdminServices.addTKAdmin(a, b, c);
         List<Admin> list = AdminServices.getDataAdmin();
         for (Admin a1 : list){
-            if(a1.getTk().equals("test000") && 
+            if(a1.getTk().equals("Test") && 
                     a1.getPass().equals("123456") &&  
-                        a1.getEmail().equals("test000@ou.edu.vn")){
+                        a1.getEmail().equals("Test@gmail.com")){
                 q = a1.getTk();
                 w = a1.getPass();
                 e = a1.getEmail();
             }
         }
-            Assert.assertEquals("test000", q);
+            Assert.assertEquals("Tuan", q);
             Assert.assertEquals("123456", w);
-            Assert.assertEquals("test000@ou.edu.vn", e);
-            JOptionPane.showMessageDialog(null, "Add tai khoan thanh cong");
+            Assert.assertEquals("1851050169tuan@ou.edu.vn", e);
+            JOptionPane.showMessageDialog(null, "Thêm tài khoản thành công!");
         }catch(Exception ex){
             JOptionPane.showMessageDialog(null, ex);
         }

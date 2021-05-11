@@ -5,6 +5,8 @@
  */
 package com.mycompany.htbanve.service;
 import com.mycompany.htbanve.pojo.QLBV;
+
+import com.mycompany.htbanve.pojo.QLCX;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -50,11 +52,10 @@ public class QLBVServices {
             v.setGiokh(rs.getString("QLBVgiokh"));
             v.setGiave(rs.getString("QLBVgiave"));
             v.setGhe(rs.getString("QLBVghe"));
-            v.setTenkh(rs.getString("QLBVtenkh"));
-            v.setSdtkh(rs.getString("QLBVsdtkh"));
             v.setTennv(rs.getString("QLBVtennv"));
             v.setSdtnv(rs.getString("QLBVsdtnv"));
-              
+            v.setTenkh(rs.getString("QLBVtenkh"));
+            v.setSdtkh(rs.getString("QLBVsdtkh"));
             results.add(v);
         }
         return results;
@@ -66,17 +67,17 @@ public class QLBVServices {
             PreparedStatement ps = conn.prepareStatement("select * from qlbv");
             ResultSet rs = ps.executeQuery();
             while (rs.next()){
-                 list.add(new QLBV(rs.getString("QLBVid"),rs.getString("QLBVtencx"), rs.getString("QLBVbsx"), rs.getString("QLBVgiokh")
-                         , rs.getString("QLBVgiave"), rs.getString("QLBVtennv"), rs.getString("QLBVsdtnv")
-                         , rs.getString("QLBVloaixe"), rs.getString("QLBVtenkh"), rs.getString("QLBVsdtkh")
-                         , rs.getString("QLBVngaykh"),rs.getString("QLBVghe"),rs.getString("idphanbiet")));  
+                 list.add(new QLBV((rs.getString("QLBVid")),rs.getString("QLBVtencx"),rs.getString("QLBVbsx")
+                         ,rs.getString("QLBVloaixe"),rs.getString("QLBVngaykh"), rs.getString("QLBVgiokh")
+                         ,rs.getString("QLBVgiave"),rs.getString("QLBVghe"),rs.getString("QLBVtennv"),rs.getString("QLBVsdtnv")
+                         , rs.getString("QLBVtenkh"),rs.getString("QLBVsdtkh"),rs.getString("idphanbiet")));  
 
             }
         } catch (SQLException e) {
-            
         }
         return list;
     }
+    
     public static void updateQLBV(String value1, String value2, String value3, String value4) throws SQLException{
         Connection conn = JdbcUtils.getConnection();
         String sql = "UPDATE qlbv set QLBVtenkh= '"+value1+"',QLBVsdtkh= '"+value2+"',QLBVghe='"+value3+"' where QLBVid = '"+value4+"' ";
@@ -88,8 +89,8 @@ public class QLBVServices {
             ,String value11, String value12) throws SQLException{
         Connection conn = JdbcUtils.getConnection();
         String rd = UUID.randomUUID().toString();
-        String sql = "INSERT INTO qlbv (QLBVid,QLBVtencx,QLBVbsx,QLBVgiokh,QLBVngaykh"
-                    + ",QLBVgiave,QLBVghe,QLBVloaixe,QLBVtennv,QLBVsdtnv,QLBVtenkh,QLBVsdtkh,idphanbiet)values(?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO qlbv (QLBVid,QLBVtencx,QLBVbsx,QLBVloaixe,QLBVngaykh,QLBVgiokh"
+                + ",QLBVgiave,QLBVghe,QLBVtennv,QLBVsdtnv,QLBVtenkh,QLBVsdtkh,idphanbiet)values(?,?,?,?,?,?,?,?,?,?,?,?,?)";
             PreparedStatement pst = conn.prepareStatement(sql);                
             pst.setString(1, value1 );
             pst.setString(2,value2);
@@ -104,7 +105,6 @@ public class QLBVServices {
             pst.setString(11,value11);
             pst.setString(12,value12);
             pst.setString(13,rd);
-            
             pst.execute();   
     }
     public static void GiamGhe(String value1, String value2) throws SQLException{
@@ -138,13 +138,9 @@ public class QLBVServices {
             }
         }
     }
-    public static void XoaVe(String a,String b) throws SQLException{
+    public static void XoaVe(String a) throws SQLException{
         Connection conn = JdbcUtils.getConnection();
-        String sql = "DELETE FROM qlbv where QLBVid = ?";
-        PreparedStatement pst = conn.prepareStatement(sql);
-        pst.setString(1, a);
-        pst.execute();
-        JOptionPane.showMessageDialog(null, "delete");
+        
         try {
                 String sql1 = "select QLCXghe from qlcx"; 
                 PreparedStatement pst1 = conn.prepareStatement(sql1);
@@ -152,13 +148,19 @@ public class QLBVServices {
                 if(rs1.next()){ 
                     Integer d = (Integer.parseInt(rs1.getString(1))) + 1;
                     String value1 = d.toString();
-                    String value2 = b;
-                    String sql3 = "UPDATE qlcx set QLCXghe= '"+value1+"' where idphanbiet = '"+value2+"' ";
+                    String value2 = a;
+                    String sql3 = "UPDATE qlcx set QLCXghe= '"+value1+"' where QLCXid = '"+value2+"' ";
                     PreparedStatement pst2 = conn.prepareStatement(sql3);
                     pst2.execute(); 
+                    
                 }
             } catch (SQLException e) {
                 JOptionPane.showMessageDialog(null, e);
             }
+        
+        String sql = "DELETE FROM qlbv where QLBVid = ?";
+        PreparedStatement pst = conn.prepareStatement(sql);
+        pst.setString(1, a);
+        pst.execute();
     }
 }

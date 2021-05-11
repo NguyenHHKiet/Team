@@ -34,10 +34,10 @@ public class PrintTicketController {
     @FXML Label tenkhLabel;
     @FXML Label sdtLabel;
     @FXML Label tennvLabel;
-    @FXML Label ngayinLabel;
-    @FXML Label gioinLabel;
+
     
     public void setPrint(QLBV pt){
+        
         idLabel.setText(pt.getId());
         tencxLabel.setText(pt.getTencx());
         bsxLabel.setText(pt.getBsx());
@@ -48,8 +48,7 @@ public class PrintTicketController {
         tenkhLabel.setText(pt.getTenkh());
         sdtLabel.setText(pt.getSdtkh());
         tennvLabel.setText(pt.getTennv());
-        ngayinLabel.setText(LocalDate.now().toString());
-        gioinLabel.setText(LocalTime.now().toString().substring(0, 5));
+
     }
     
     @FXML
